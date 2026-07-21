@@ -1,0 +1,81 @@
+x-airflow-common: &airflow-common
+  build:
+    context: .
+    dockerfile: Dockerfile
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres/${POSTGRES_DB}
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__DEFAULT_TIMEZONE: ${TIMEZONE:-Asia/Tokyo}
+    PYTHONPATH: /opt/airflow/src:/opt/airflow
+    POSTGRES_HOST: postgres
+    POSTGRES_PORT: 5432
+    POSTGRES_DB: ${POSTGRES_DB}
+    POSTGRES_USER: ${POSTGRES_USER}
+    POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    GEMINI_API_KEY: ${GEMINI_API_KEY}
+    GEMINI_MODEL: ${GEMINI_MODEL}
+    PEXELS_API_KEY: ${PEXELS_API_KEY}
+    EDGE_TTS_VOICE: ${EDGE_TTS_VOICE}
+    EDGE_TTS_VOICE_EXAMPLE: ${EDGE_TTS_VOICE_EXAMPLE}
+    YOUTUBE_CLIENT_SECRETS_FILE: ${YOUTUBE_CLIENT_SECRETS_FILE}
+    YOUTUBE_TOKEN_FILE: ${YOUTUBE_TOKEN_FILE}
+    YOUTUBE_CHANNEL_ID: ${YOUTUBE_CHANNEL_ID}
+    PHRASE_INVENTORY_THRESHOLD: ${PHRASE_INVENTORY_THRESHOLD}
+    PHRASE_GENERATION_BATCH: ${PHRASE_GENERATION_BATCH}
+    DEFAULT_VISIBILITY: ${DEFAULT_VISIBILITY}
+  volumes:
+    - ./dags:/opt/airflow/dags
+    - ./src:/opt/airflow/src
+    - ./config:/opt/airflow/config
+    - ./assets:/opt/airflow/assets
+    - ./output:/opt/airflow/output
+    - ./logs:/opt/airflow/logs
+    - ./database:/opt/airflow/database
+  depends_on:
+    - postgres
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}"]
+      interval: 5s
+      retries: 5
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        airflow db migrate
+        airflow users create \
+          --username admin --password admin \
+          --firstname Admin --lastname User \
+          --role Admin --email admin@example.com
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    restart: always
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    restart: always
+
+volumes:
+  postgres-db-volume:

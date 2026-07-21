@@ -1,0 +1,55 @@
+[2026-07-21T13:06:02.498+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-21T13:06:02.545+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video manual__2026-07-21T13:00:21.173940+00:00 [queued]>
+[2026-07-21T13:06:02.565+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video manual__2026-07-21T13:00:21.173940+00:00 [queued]>
+[2026-07-21T13:06:02.569+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2026-07-21T13:06:02.598+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): upload_short_video> on 2026-07-21 13:00:21.173940+00:00
+[2026-07-21T13:06:02.609+0000] {standard_task_runner.py:64} INFO - Started process 3733 to run task
+[2026-07-21T13:06:02.615+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'upload_short_video', 'manual__2026-07-21T13:00:21.173940+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp1vhvaoc3']
+[2026-07-21T13:06:02.629+0000] {standard_task_runner.py:91} INFO - Job 28: Subtask upload_short_video
+[2026-07-21T13:06:02.795+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.upload_short_video manual__2026-07-21T13:00:21.173940+00:00 [running]> on host 38df6585cc26
+[2026-07-21T13:06:03.101+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='upload_short_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-21T13:00:21.173940+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-21T13:00:21.173940+00:00'
+[2026-07-21T13:06:03.103+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-21T13:06:03.271+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-21T13:06:03.272+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 72, in task_upload_short_video
+    youtube_id = upload_video(result)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 144, in upload_video
+    return uploader.upload(req)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 84, in upload
+    youtube = self._client()
+              ^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 76, in _client
+    creds = self._get_credentials()
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 69, in _get_credentials
+    creds = flow.run_local_server(port=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google_auth_oauthlib/flow.py", line 447, in run_local_server
+    webbrowser.get(browser).open(auth_url, new=1, autoraise=True)
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/webbrowser.py", line 66, in get
+    raise Error("could not locate runnable browser")
+webbrowser.Error: could not locate runnable browser
+[2026-07-21T13:06:03.297+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=upload_short_video, run_id=manual__2026-07-21T13:00:21.173940+00:00, execution_date=20260721T130021, start_date=20260721T130602, end_date=20260721T130603
+[2026-07-21T13:06:03.318+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 28 for task upload_short_video (could not locate runnable browser; 3733)
+[2026-07-21T13:06:03.354+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-21T13:06:03.379+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-21T13:06:03.384+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

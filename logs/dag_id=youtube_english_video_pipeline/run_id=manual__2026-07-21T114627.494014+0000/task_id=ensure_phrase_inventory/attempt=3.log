@@ -1,0 +1,95 @@
+[2026-07-21T11:56:45.350+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-21T11:56:45.376+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory manual__2026-07-21T11:46:27.494014+00:00 [queued]>
+[2026-07-21T11:56:45.382+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory manual__2026-07-21T11:46:27.494014+00:00 [queued]>
+[2026-07-21T11:56:45.383+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2026-07-21T11:56:45.392+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory> on 2026-07-21 11:46:27.494014+00:00
+[2026-07-21T11:56:45.395+0000] {standard_task_runner.py:64} INFO - Started process 370 to run task
+[2026-07-21T11:56:45.398+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory', 'manual__2026-07-21T11:46:27.494014+00:00', '--job-id', '8', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpy6uq1ec_']
+[2026-07-21T11:56:45.402+0000] {standard_task_runner.py:91} INFO - Job 8: Subtask ensure_phrase_inventory
+[2026-07-21T11:56:45.557+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory manual__2026-07-21T11:46:27.494014+00:00 [running]> on host 80adf722914d
+[2026-07-21T11:56:46.207+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory' AIRFLOW_CTX_EXECUTION_DATE='2026-07-21T11:46:27.494014+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-21T11:46:27.494014+00:00'
+[2026-07-21T11:56:46.208+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-21T11:56:46.518+0000] {logging_mixin.py:188} INFO - 2026-07-21 11:56:46,518 | INFO     | generators.phrase_generator | Unused phrase inventory: 10 (threshold=30)
+[2026-07-21T11:56:46.519+0000] {logging_mixin.py:188} INFO - 2026-07-21 11:56:46,519 | INFO     | generators.phrase_generator | Requesting 50 phrases from Gemini...
+[2026-07-21T11:56:53.188+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-21T11:56:53.190+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 478, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 40, in _call_gemini
+    response = self.model.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 827, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 153, in retry_target
+    _retry_error_helper(
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_base.py", line 212, in _retry_error_helper
+    raise final_exc from source_exc
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.NotFound: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for generateContent. Call ModelService.ListModels to see the list of available models and their supported methods.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 55, in task_ensure_phrase_inventory
+    inserted = ensure_phrase_inventory()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 108, in ensure_phrase_inventory
+    return generator.generate_and_store(batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 86, in generate_and_store
+    phrases = self.generate_phrases(count)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 59, in generate_phrases
+    raw_text = self._call_gemini(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 475, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 419, in exc_check
+    raise retry_exc from fut.exception()
+tenacity.RetryError: RetryError[<Future at 0x7a5c9f719850 state=finished raised NotFound>]
+[2026-07-21T11:56:53.212+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory, run_id=manual__2026-07-21T11:46:27.494014+00:00, execution_date=20260721T114627, start_date=20260721T115645, end_date=20260721T115653
+[2026-07-21T11:56:53.221+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 8 for task ensure_phrase_inventory (RetryError[<Future at 0x7a5c9f719850 state=finished raised NotFound>]; 370)
+[2026-07-21T11:56:53.269+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-21T11:56:53.291+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-21T11:56:53.303+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,14 @@
+.env
+__pycache__/
+*.pyc
+config/client_secret.json
+config/token.json
+output/audio/*
+output/images/*
+output/subtitles/*
+output/videos/*
+output/thumbnails/*
+output/metadata/*
+!output/**/.gitkeep
+logs/*.log
+.pytest_cache/

@@ -1,0 +1,24 @@
+apache-airflow==2.9.3
+psycopg2-binary==2.9.9
+# SQLAlchemy はAirflow本体が依存として解決するため明示指定しない
+# (apache-airflow==2.9.3 は sqlalchemy<2.0,>=1.4.36 を要求する)
+
+google-generativeai==0.7.2
+# edge-tts はMicrosoft側のAPIエンドポイント/認証仕様変更に追従するパッチが
+# 頻繁に入るため、厳密な==固定ではなく下限指定にしている（古い固定バージョンは
+# 403 WSServerHandshakeError で失敗することがある）
+edge-tts>=7.2.8
+requests==2.32.3
+Pillow==10.4.0
+
+ffmpeg-python==0.2.0
+
+google-api-python-client==2.140.0
+google-auth==2.32.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0
+
+pydantic==2.8.2
+python-dotenv==1.0.1
+PyYAML==6.0.2
+tenacity==8.5.0
