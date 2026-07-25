@@ -24,6 +24,7 @@ x-airflow-common: &airflow-common
     PHRASE_INVENTORY_THRESHOLD: ${PHRASE_INVENTORY_THRESHOLD}
     PHRASE_GENERATION_BATCH: ${PHRASE_GENERATION_BATCH}
     DEFAULT_VISIBILITY: ${DEFAULT_VISIBILITY}
+    FORCE_BUILD_LONG_VIDEO: ${FORCE_BUILD_LONG_VIDEO:-false}
   volumes:
     - ./dags:/opt/airflow/dags
     - ./src:/opt/airflow/src
@@ -75,6 +76,8 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    ports:
+      - "8081:8081"
     restart: always
 
 volumes:

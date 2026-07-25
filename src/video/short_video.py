@@ -11,7 +11,6 @@ from config.settings import settings
 from database.repository import Phrase, Repository, VideoRecord
 from generators.metadata_generator import MetadataGenerator
 from media.image_downloader import ImageDownloader
-from media.subtitle_generator import SubtitleGenerator
 from planner.video_planner import VideoPlanner
 from tts.edge_tts import TTSGenerator
 from utils.logger import get_logger
@@ -36,7 +35,6 @@ class ShortVideoPipeline:
         self.planner = VideoPlanner(self.repository)
         self.tts = TTSGenerator()
         self.images = ImageDownloader()
-        self.subtitles = SubtitleGenerator()
         self.metadata_gen = MetadataGenerator()
         self.builder = VideoBuilder(video_type="short")
 
@@ -60,14 +58,8 @@ class ShortVideoPipeline:
         raw_segment_path = tmp_dir / f"short_{phrase.id}_raw.mp4"
         self.builder.render_segment(segment, raw_segment_path)
 
-        cues, _ = self.subtitles.build_segment_cues(
-            phrase.id, phrase.phrase, phrase.example,
-            audio["phrase_audio"], audio["example_audio"],
-        )
-        srt_path = self.subtitles.build_video_srt("short", phrase.id, cues)
-
         final_path = settings.output_dir / "videos" / f"short_{phrase.id}.mp4"
-        self.builder.finalize(raw_segment_path, srt_path, final_path)
+        self.builder.finalize(raw_segment_path, final_path)
 
         metadata = self.metadata_gen.generate("short", plan.topic, [phrase])
 

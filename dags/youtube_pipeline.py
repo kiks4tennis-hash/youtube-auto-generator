@@ -19,6 +19,7 @@ YouTube English Video Auto Generator - メインDAG
 
 from __future__ import annotations
 
+import os
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -74,7 +75,15 @@ def task_upload_short_video(**context):
 
 
 def task_should_build_long_video(**context) -> bool:
-    """毎日Long動画まで作ると素材消費が激しいため、曜日で間引く（例: 週2本）"""
+    """
+    毎日Long動画まで作ると素材消費が激しいため、通常は曜日で間引く（例: 週2本）。
+    テスト時などに毎回Long動画を作りたい場合は、.envで
+        FORCE_BUILD_LONG_VIDEO=true
+    を設定するとこの間引きをスキップできる。
+    """
+    if os.getenv("FORCE_BUILD_LONG_VIDEO", "false").lower() in ("1", "true", "yes"):
+        return True
+
     execution_date: datetime = context["logical_date"]
     return execution_date.weekday() in (1, 4)  # 火曜・金曜のみLong動画を作る
 

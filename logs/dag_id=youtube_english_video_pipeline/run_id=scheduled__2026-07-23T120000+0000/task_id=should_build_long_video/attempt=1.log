@@ -1,0 +1,100 @@
+[2026-07-25T00:45:36.018+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T00:45:36.082+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T00:45:36.098+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T00:45:36.212+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T00:45:36.441+0000] {taskinstance.py:2330} INFO - Executing <Task(ShortCircuitOperator): should_build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T00:45:36.490+0000] {standard_task_runner.py:64} INFO - Started process 3919 to run task
+[2026-07-25T00:45:36.497+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'should_build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '86', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpgy3rbrag']
+[2026-07-25T00:45:36.707+0000] {standard_task_runner.py:91} INFO - Job 86: Subtask should_build_long_video
+[2026-07-25T00:45:38.289+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host c5a4498ba4b2
+[2026-07-25T00:45:38.806+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='should_build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T00:45:38.819+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T00:45:38.833+0000] {baseoperator.py:400} WARNING - ShortCircuitOperator.execute cannot be called outside TaskInstance!
+[2026-07-25T00:45:38.835+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-07-25T00:45:38.836+0000] {python.py:304} INFO - Condition result is True
+[2026-07-25T00:45:38.837+0000] {python.py:307} INFO - Proceeding with downstream tasks...
+[2026-07-25T00:45:38.838+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T00:45:38.884+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=should_build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T004536, end_date=20260725T004538
+[2026-07-25T00:45:38.997+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-25T00:45:39.097+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T00:45:39.152+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T03:53:03.337+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T03:53:03.364+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T03:53:03.370+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T03:53:03.370+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T03:53:03.380+0000] {taskinstance.py:2330} INFO - Executing <Task(ShortCircuitOperator): should_build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T03:53:03.384+0000] {standard_task_runner.py:64} INFO - Started process 211 to run task
+[2026-07-25T03:53:03.386+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'should_build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '135', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp3g3o3zpv']
+[2026-07-25T03:53:03.388+0000] {standard_task_runner.py:91} INFO - Job 135: Subtask should_build_long_video
+[2026-07-25T03:53:03.456+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T03:53:03.645+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='should_build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T03:53:03.646+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T03:53:03.653+0000] {baseoperator.py:400} WARNING - ShortCircuitOperator.execute cannot be called outside TaskInstance!
+[2026-07-25T03:53:03.653+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-07-25T03:53:03.654+0000] {python.py:304} INFO - Condition result is True
+[2026-07-25T03:53:03.655+0000] {python.py:307} INFO - Proceeding with downstream tasks...
+[2026-07-25T03:53:03.656+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T03:53:03.677+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=should_build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T035303, end_date=20260725T035303
+[2026-07-25T03:53:03.719+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-25T03:53:03.743+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T03:53:03.746+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T04:04:56.142+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T04:04:56.196+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:04:56.208+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:04:56.209+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T04:04:56.229+0000] {taskinstance.py:2330} INFO - Executing <Task(ShortCircuitOperator): should_build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T04:04:56.237+0000] {standard_task_runner.py:64} INFO - Started process 212 to run task
+[2026-07-25T04:04:56.242+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'should_build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '149', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpn_quk3l2']
+[2026-07-25T04:04:56.245+0000] {standard_task_runner.py:91} INFO - Job 149: Subtask should_build_long_video
+[2026-07-25T04:04:56.346+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T04:04:56.654+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='should_build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T04:04:56.655+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T04:04:56.665+0000] {baseoperator.py:400} WARNING - ShortCircuitOperator.execute cannot be called outside TaskInstance!
+[2026-07-25T04:04:56.666+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-07-25T04:04:56.667+0000] {python.py:304} INFO - Condition result is True
+[2026-07-25T04:04:56.667+0000] {python.py:307} INFO - Proceeding with downstream tasks...
+[2026-07-25T04:04:56.668+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T04:04:56.692+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=should_build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T040456, end_date=20260725T040456
+[2026-07-25T04:04:56.737+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-25T04:04:56.764+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T04:04:56.767+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T04:14:21.016+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T04:14:21.045+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:14:21.050+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:14:21.051+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T04:14:21.060+0000] {taskinstance.py:2330} INFO - Executing <Task(ShortCircuitOperator): should_build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T04:14:21.064+0000] {standard_task_runner.py:64} INFO - Started process 211 to run task
+[2026-07-25T04:14:21.066+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'should_build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '161', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpfc22ed7p']
+[2026-07-25T04:14:21.068+0000] {standard_task_runner.py:91} INFO - Job 161: Subtask should_build_long_video
+[2026-07-25T04:14:21.136+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T04:14:21.340+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='should_build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T04:14:21.341+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T04:14:21.347+0000] {baseoperator.py:400} WARNING - ShortCircuitOperator.execute cannot be called outside TaskInstance!
+[2026-07-25T04:14:21.347+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-07-25T04:14:21.348+0000] {python.py:304} INFO - Condition result is True
+[2026-07-25T04:14:21.348+0000] {python.py:307} INFO - Proceeding with downstream tasks...
+[2026-07-25T04:14:21.348+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T04:14:21.368+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=should_build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T041421, end_date=20260725T041421
+[2026-07-25T04:14:21.403+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-25T04:14:21.425+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T04:14:21.428+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T05:09:54.908+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T05:09:54.944+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T05:09:54.953+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T05:09:54.954+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T05:09:54.969+0000] {taskinstance.py:2330} INFO - Executing <Task(ShortCircuitOperator): should_build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T05:09:54.974+0000] {standard_task_runner.py:64} INFO - Started process 3173 to run task
+[2026-07-25T05:09:54.977+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'should_build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '230', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp1hmd7zlz']
+[2026-07-25T05:09:54.979+0000] {standard_task_runner.py:91} INFO - Job 230: Subtask should_build_long_video
+[2026-07-25T05:09:55.067+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.should_build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T05:09:55.374+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='should_build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T05:09:55.376+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T05:09:55.389+0000] {baseoperator.py:400} WARNING - ShortCircuitOperator.execute cannot be called outside TaskInstance!
+[2026-07-25T05:09:55.391+0000] {python.py:237} INFO - Done. Returned value was: True
+[2026-07-25T05:09:55.392+0000] {python.py:304} INFO - Condition result is True
+[2026-07-25T05:09:55.392+0000] {python.py:307} INFO - Proceeding with downstream tasks...
+[2026-07-25T05:09:55.393+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T05:09:55.422+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=should_build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T050954, end_date=20260725T050955
+[2026-07-25T05:09:55.471+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-25T05:09:55.504+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T05:09:55.510+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

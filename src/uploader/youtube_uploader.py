@@ -66,7 +66,13 @@ class YouTubeUploader:
                     settings.youtube.client_secrets_file, SCOPES
                 )
                 # サーバー環境ではrun_console、ローカルではrun_local_serverを使う
-                creds = flow.run_local_server(port=0)
+                # creds = flow.run_local_server(port=0)
+                creds = flow.run_local_server(
+                    host="localhost",
+                    bind_addr="0.0.0.0",
+                    port=8081,
+                    open_browser=False,
+                )
             token_path.parent.mkdir(parents=True, exist_ok=True)
             token_path.write_text(creds.to_json(), encoding="utf-8")
 

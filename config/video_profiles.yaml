@@ -8,11 +8,14 @@ short:
   width: 1080
   height: 1920
   fps: 30
+  video_preset: medium
+  video_crf: 23
   duration: 45              # 目安秒数（実際は音声長に合わせて可変）
   min_duration: 30
   max_duration: 60
-  font_size: 72
-  font_path: assets/fonts/NotoSansJP-Bold.ttf
+  font_size: 88
+  # font_path: assets/fonts/NotoSansJP-Bold.ttf
+  font_path: /usr/share/fonts/truetype/noto/NotoSans-Regular.ttf
   phrase_font_color: "#FFFFFF"
   example_font_color: "#FFD54A"
   background_music: assets/bgm/short_bgm.mp3
@@ -25,11 +28,14 @@ long:
   width: 1920
   height: 1080
   fps: 30
+  video_preset: medium
+  video_crf: 23
   duration: 600             # 目安秒数（実際は音声長に合わせて可変）
   min_duration: 300
   max_duration: 900
-  font_size: 56
-  font_path: assets/fonts/NotoSansJP-Bold.ttf
+  font_size: 76
+  # font_path: assets/fonts/NotoSansJP-Bold.ttf
+  font_path: /usr/share/fonts/truetype/noto/NotoSans-Regular.ttf
   phrase_font_color: "#FFFFFF"
   example_font_color: "#FFD54A"
   background_music: assets/bgm/long_bgm.mp3

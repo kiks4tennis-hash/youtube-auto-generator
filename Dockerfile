@@ -2,9 +2,11 @@ FROM apache/airflow:2.9.3-python3.11
 
 USER root
 
-# ffmpeg はレンダリングに必須
+# ffmpeg + 英語フォント（NotoSans）
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg fonts-noto \
+    && apt-get install -y --no-install-recommends \
+        ffmpeg \
+        fonts-noto-core \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

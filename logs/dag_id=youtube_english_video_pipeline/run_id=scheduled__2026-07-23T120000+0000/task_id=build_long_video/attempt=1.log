@@ -1,0 +1,452 @@
+[2026-07-25T00:45:41.218+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T00:45:41.288+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T00:45:41.321+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T00:45:41.322+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T00:45:41.345+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T00:45:41.356+0000] {standard_task_runner.py:64} INFO - Started process 3921 to run task
+[2026-07-25T00:45:41.361+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '87', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp48tvbc67']
+[2026-07-25T00:45:41.367+0000] {standard_task_runner.py:91} INFO - Job 87: Subtask build_long_video
+[2026-07-25T00:45:42.115+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host c5a4498ba4b2
+[2026-07-25T00:45:42.876+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T00:45:43.099+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T00:46:17.704+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:17,704 | INFO     | planner.video_planner | Planned LONG video: topic='Restaurant English', phrases=18
+[2026-07-25T00:46:19.716+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:19,716 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_70.mp3
+[2026-07-25T00:46:21.767+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:21,767 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_70.mp3
+[2026-07-25T00:46:26.539+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:26,538 | INFO     | media.image_downloader | Downloaded background image for scene='dinner' -> /opt/airflow/output/images/long_70.jpg
+[2026-07-25T00:46:26.682+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:26,682 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_70.mp3 -i /opt/airflow/output/audio/example_70.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_70_raw.audio.mp3
+[2026-07-25T00:46:29.096+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:46:29,096 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_70.jpg -i /opt/airflow/output/videos/_tmp/long_70_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/opt/airflow/assets/fonts/NotoSansJP-Bold.ttf':text='I’ll go with the grilled salmon.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/opt/airflow/assets/fonts/NotoSansJP-Bold.ttf':text='Everything on the menu looks delicious, but\nI think I’ll go with the grilled salmon.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset slow -crf 18 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_70_raw.mp4
+[2026-07-25T00:51:01.203+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:51:01,189 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_79.mp3
+[2026-07-25T00:51:02.069+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:51:02,068 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_79.mp3
+[2026-07-25T00:51:08.946+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:51:08,945 | INFO     | media.image_downloader | Downloaded background image for scene='salad' -> /opt/airflow/output/images/long_79.jpg
+[2026-07-25T00:51:09.103+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:51:09,103 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_79.mp3 -i /opt/airflow/output/audio/example_79.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_79_raw.audio.mp3
+[2026-07-25T00:51:12.622+0000] {logging_mixin.py:188} INFO - 2026-07-25 00:51:12,622 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_79.jpg -i /opt/airflow/output/videos/_tmp/long_79_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/opt/airflow/assets/fonts/NotoSansJP-Bold.ttf':text='Can I have the dressing on the side?':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/opt/airflow/assets/fonts/NotoSansJP-Bold.ttf':text='I would like to order the Caesar salad, but\ncan I have the dressing on the side?':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset slow -crf 18 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_79_raw.mp4
+[2026-07-25T00:54:44.821+0000] {local_task_job_runner.py:124} ERROR - Received SIGTERM. Terminating subprocesses
+[2026-07-25T00:54:44.946+0000] {process_utils.py:132} INFO - Sending 15 to group 3921. PIDs of all processes in the group: [4292, 3921]
+[2026-07-25T00:54:44.965+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 3921
+[2026-07-25T00:54:44.984+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-07-25T00:54:45.561+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T00:54:45.575+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=4292, status='terminated', started='00:51:12') (4292) terminated with exit code None
+[2026-07-25T00:54:45.731+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 94, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 69, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 99, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 34, in _run
+    subprocess.run(cmd, check=True, capture_output=True)
+  File "/usr/local/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 2115, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-07-25T00:54:47.475+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T004541, end_date=20260725T005447
+[2026-07-25T00:54:47.825+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=3921, status='terminated', exitcode=2, started='00:45:41') (3921) terminated with exit code 2
+[2026-07-25T00:54:47.882+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 143
+[2026-07-25T00:54:48.016+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T03:53:04.467+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T03:53:04.499+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T03:53:04.506+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T03:53:04.507+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T03:53:04.519+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T03:53:04.524+0000] {standard_task_runner.py:64} INFO - Started process 215 to run task
+[2026-07-25T03:53:04.529+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '137', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpe6o1n63o']
+[2026-07-25T03:53:04.531+0000] {standard_task_runner.py:91} INFO - Job 137: Subtask build_long_video
+[2026-07-25T03:53:04.623+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T03:53:04.833+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T03:53:04.835+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T03:53:05.225+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:05,225 | INFO     | planner.video_planner | Planned LONG video: topic='Business English', phrases=17
+[2026-07-25T03:53:05.457+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:05,457 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_184.mp3
+[2026-07-25T03:53:05.739+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:05,739 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_184.mp3
+[2026-07-25T03:53:05.935+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:05,935 | INFO     | media.image_downloader | Downloaded background image for scene='phone' -> /opt/airflow/output/images/long_184.jpg
+[2026-07-25T03:53:05.936+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:05,936 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_184.mp3 -i /opt/airflow/output/audio/example_184.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3
+[2026-07-25T03:53:06.063+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:06,063 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_184.jpg -i /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could I leave a message?':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Since Mr. Davis is out of the office, could\nI leave a message for him?':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_184_raw.mp4
+[2026-07-25T03:53:12.817+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:12,816 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_228.mp3
+[2026-07-25T03:53:13.164+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:13,164 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_228.mp3
+[2026-07-25T03:53:13.421+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:13,421 | INFO     | media.image_downloader | Downloaded background image for scene='phone' -> /opt/airflow/output/images/long_228.jpg
+[2026-07-25T03:53:13.427+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:13,427 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_228.mp3 -i /opt/airflow/output/audio/example_228.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_228_raw.audio.mp3
+[2026-07-25T03:53:13.671+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:13,671 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_228.jpg -i /opt/airflow/output/videos/_tmp/long_228_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could you speak up a bit?':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='The connection is quite poor, so could you\nspeak up a bit?':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_228_raw.mp4
+[2026-07-25T03:53:18.381+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:18,380 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_231.mp3
+[2026-07-25T03:53:18.674+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:18,674 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_231.mp3
+[2026-07-25T03:53:18.866+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:18,866 | INFO     | media.image_downloader | Downloaded background image for scene='meeting' -> /opt/airflow/output/images/long_231.jpg
+[2026-07-25T03:53:18.868+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:18,868 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_231.mp3 -i /opt/airflow/output/audio/example_231.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_231_raw.audio.mp3
+[2026-07-25T03:53:18.986+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:18,986 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_231.jpg -i /opt/airflow/output/videos/_tmp/long_231_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Sorry to keep you waiting.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Sorry to keep you waiting, I had to respond\nto an urgent phone call.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_231_raw.mp4
+[2026-07-25T03:53:22.761+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:22,761 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_190.mp3
+[2026-07-25T03:53:22.985+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:22,985 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_190.mp3
+[2026-07-25T03:53:23.166+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:23,166 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_190.jpg
+[2026-07-25T03:53:23.167+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:23,167 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_190.mp3 -i /opt/airflow/output/audio/example_190.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_190_raw.audio.mp3
+[2026-07-25T03:53:23.275+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:23,275 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_190.jpg -i /opt/airflow/output/videos/_tmp/long_190_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='That makes sense.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Ah, I see why you changed the project\ntimeline now. That makes sense.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_190_raw.mp4
+[2026-07-25T03:53:27.442+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:27,442 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_198.mp3
+[2026-07-25T03:53:27.734+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:27,734 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_198.mp3
+[2026-07-25T03:53:27.994+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:27,994 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_198.jpg
+[2026-07-25T03:53:27.994+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:27,994 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_198.mp3 -i /opt/airflow/output/audio/example_198.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_198_raw.audio.mp3
+[2026-07-25T03:53:28.096+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:28,096 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_198.jpg -i /opt/airflow/output/videos/_tmp/long_198_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Let me double-check.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I think the presentation starts at 2 PM, but\nlet me double-check my calendar.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_198_raw.mp4
+[2026-07-25T03:53:31.769+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:31,769 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_205.mp3
+[2026-07-25T03:53:32.034+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:32,034 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_205.mp3
+[2026-07-25T03:53:32.216+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:32,216 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_205.jpg
+[2026-07-25T03:53:32.223+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:32,223 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_205.mp3 -i /opt/airflow/output/audio/example_205.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3
+[2026-07-25T03:53:32.325+0000] {logging_mixin.py:188} INFO - 2026-07-25 03:53:32,325 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_205.jpg -i /opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\'m looking forward to it.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Thank you for inviting me to the conference\nnext week, I\'m looking forward to it.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_205_raw.mp4
+[2026-07-25T03:53:32.461+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T03:53:32.462+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 94, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 69, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 101, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 34, in _run
+    subprocess.run(cmd, check=True, capture_output=True)
+  File "/usr/local/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/long_205.jpg', '-i', '/opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3', '-vf', "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\\'m looking forward to it.':fontcolor=FFFFFF:fontsize=76:x=(w-text_w)/2:y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=20,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Thank you for inviting me to the conference\\nnext week, I\\'m looking forward to it.':fontcolor=FFD54A:fontsize=68:x=(w-text_w)/2:y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=24", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/long_205_raw.mp4']' returned non-zero exit status 1.
+[2026-07-25T03:53:32.487+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T035304, end_date=20260725T035332
+[2026-07-25T03:53:32.508+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 137 for task build_long_video ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(youtube_english_video_pipeline, build_long_video, scheduled__2026-07-23T12:00:00+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'build_long_video', 'dag_id': 'youtube_english_video_pipeline', 'run_id': 'scheduled__2026-07-23T12:00:00+00:00', 'map_index': -1, 'start_date': datetime.datetime(2026, 7, 25, 3, 53, 4, 500547, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2026, 7, 25, 3, 53, 32, 486320, tzinfo=Timezone('UTC')), 'duration': 27}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 215)
+[2026-07-25T03:53:32.546+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-25T03:53:32.556+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T04:04:57.231+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T04:04:57.262+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:04:57.268+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:04:57.270+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T04:04:57.280+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T04:04:57.284+0000] {standard_task_runner.py:64} INFO - Started process 215 to run task
+[2026-07-25T04:04:57.287+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '150', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpik1ou3x3']
+[2026-07-25T04:04:57.292+0000] {standard_task_runner.py:91} INFO - Job 150: Subtask build_long_video
+[2026-07-25T04:04:57.408+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T04:04:57.650+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T04:04:57.651+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T04:04:58.290+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:58,290 | INFO     | planner.video_planner | Planned LONG video: topic='Business English', phrases=17
+[2026-07-25T04:04:58.537+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:58,536 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_184.mp3
+[2026-07-25T04:04:58.705+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:58,705 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_184.mp3
+[2026-07-25T04:04:58.866+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:58,866 | INFO     | media.image_downloader | Downloaded background image for scene='phone' -> /opt/airflow/output/images/long_184.jpg
+[2026-07-25T04:04:58.869+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:58,869 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_184.mp3 -i /opt/airflow/output/audio/example_184.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3
+[2026-07-25T04:04:59.052+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:04:59,052 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_184.jpg -i /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could I leave a message?​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Since Mr. Davis is out of the office, could​\nI leave a message for him?​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_184_raw.mp4
+[2026-07-25T04:05:04.747+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:04,747 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_228.mp3
+[2026-07-25T04:05:05.003+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:05,003 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_228.mp3
+[2026-07-25T04:05:05.145+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:05,144 | INFO     | media.image_downloader | Downloaded background image for scene='phone' -> /opt/airflow/output/images/long_228.jpg
+[2026-07-25T04:05:05.146+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:05,146 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_228.mp3 -i /opt/airflow/output/audio/example_228.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_228_raw.audio.mp3
+[2026-07-25T04:05:05.270+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:05,270 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_228.jpg -i /opt/airflow/output/videos/_tmp/long_228_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could you speak up a bit?​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='The connection is quite poor, so could you​\nspeak up a bit?​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_228_raw.mp4
+[2026-07-25T04:05:09.018+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:09,018 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_231.mp3
+[2026-07-25T04:05:09.268+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:09,268 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_231.mp3
+[2026-07-25T04:05:09.464+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:09,464 | INFO     | media.image_downloader | Downloaded background image for scene='meeting' -> /opt/airflow/output/images/long_231.jpg
+[2026-07-25T04:05:09.466+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:09,466 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_231.mp3 -i /opt/airflow/output/audio/example_231.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_231_raw.audio.mp3
+[2026-07-25T04:05:09.607+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:09,607 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_231.jpg -i /opt/airflow/output/videos/_tmp/long_231_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Sorry to keep you waiting.​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Sorry to keep you waiting, I had to respond​\nto an urgent phone call.​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_231_raw.mp4
+[2026-07-25T04:05:13.042+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:13,042 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_190.mp3
+[2026-07-25T04:05:13.305+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:13,305 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_190.mp3
+[2026-07-25T04:05:13.511+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:13,511 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_190.jpg
+[2026-07-25T04:05:13.514+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:13,514 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_190.mp3 -i /opt/airflow/output/audio/example_190.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_190_raw.audio.mp3
+[2026-07-25T04:05:13.617+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:13,617 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_190.jpg -i /opt/airflow/output/videos/_tmp/long_190_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='That makes sense.​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Ah, I see why you changed the project​\ntimeline now. That makes sense.​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_190_raw.mp4
+[2026-07-25T04:05:17.695+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:17,695 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_198.mp3
+[2026-07-25T04:05:17.941+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:17,941 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_198.mp3
+[2026-07-25T04:05:18.102+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:18,101 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_198.jpg
+[2026-07-25T04:05:18.104+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:18,104 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_198.mp3 -i /opt/airflow/output/audio/example_198.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_198_raw.audio.mp3
+[2026-07-25T04:05:18.209+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:18,209 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_198.jpg -i /opt/airflow/output/videos/_tmp/long_198_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Let me double-check.​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I think the presentation starts at 2 PM, but​\nlet me double-check my calendar.​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_198_raw.mp4
+[2026-07-25T04:05:21.955+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:21,955 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_205.mp3
+[2026-07-25T04:05:22.213+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:22,213 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_205.mp3
+[2026-07-25T04:05:22.382+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:22,382 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_205.jpg
+[2026-07-25T04:05:22.384+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:22,383 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_205.mp3 -i /opt/airflow/output/audio/example_205.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3
+[2026-07-25T04:05:22.481+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:05:22,481 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_205.jpg -i /opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\'m looking forward to it.​':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Thank you for inviting me to the conference​\nnext week, I\'m looking forward to it.​':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_205_raw.mp4
+[2026-07-25T04:05:22.616+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T04:05:22.617+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 94, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 69, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 106, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 35, in _run
+    subprocess.run(cmd, check=True, capture_output=True)
+  File "/usr/local/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/long_205.jpg', '-i', '/opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3', '-vf', "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\\'m looking forward to it.\u200b':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Thank you for inviting me to the conference\u200b\\nnext week, I\\'m looking forward to it.\u200b':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/long_205_raw.mp4']' returned non-zero exit status 1.
+[2026-07-25T04:05:22.645+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T040457, end_date=20260725T040522
+[2026-07-25T04:05:22.657+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 150 for task build_long_video (Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/long_205.jpg', '-i', '/opt/airflow/output/videos/_tmp/long_205_raw.audio.mp3', '-vf', "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\\'m looking forward to it.\u200b':fontcolor=FFFFFF:fontsize=76:x=(w/2 - text_w/2):y=(h*0.16):line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Thank you for inviting me to the conference\u200b\\nnext week, I\\'m looking forward to it.\u200b':fontcolor=FFD54A:fontsize=68:x=(w/2 - text_w/2):y=(h-text_h)/2+((h*0.15)):line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/long_205_raw.mp4']' returned non-zero exit status 1.; 215)
+[2026-07-25T04:05:22.682+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-25T04:05:22.699+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T04:05:22.703+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T04:14:22.175+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T04:14:22.210+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:14:22.216+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T04:14:22.217+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T04:14:22.228+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T04:14:22.232+0000] {standard_task_runner.py:64} INFO - Started process 215 to run task
+[2026-07-25T04:14:22.234+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '162', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp5f6l238v']
+[2026-07-25T04:14:22.236+0000] {standard_task_runner.py:91} INFO - Job 162: Subtask build_long_video
+[2026-07-25T04:14:22.315+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T04:14:22.491+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T04:14:22.492+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T04:14:22.907+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:22,907 | INFO     | planner.video_planner | Planned LONG video: topic='Business English', phrases=17
+[2026-07-25T04:14:23.179+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:23,179 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_184.mp3
+[2026-07-25T04:14:23.450+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:23,450 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_184.mp3
+[2026-07-25T04:14:23.645+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:23,645 | INFO     | media.image_downloader | Downloaded background image for scene='phone' -> /opt/airflow/output/images/long_184.jpg
+[2026-07-25T04:14:23.646+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:23,646 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -i /opt/airflow/output/audio/phrase_184.mp3 -i /opt/airflow/output/audio/example_184.mp3 -filter_complex [0:a]apad=pad_dur=0.4[a0];[a0][1:a]concat=n=2:v=0:a=1[aout] -map [aout] /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3
+[2026-07-25T04:14:23.740+0000] {logging_mixin.py:188} INFO - 2026-07-25 04:14:23,740 | INFO     | video.video_builder | Running ffmpeg: ffmpeg -y -loop 1 -i /opt/airflow/output/images/long_184.jpg -i /opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3 -vf scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could I leave a message?​':fontcolor=FFFFFF:fontsize=76:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Since Mr. Davis is out of the office, could​\nI leave a message for him?​':fontcolor=FFD54A:fontsize=68:x=w/2:y=(h-text_h)/2+(h*0.15):text_align=center:line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16 -c:v libx264 -preset medium -crf 23 -tune stillimage -pix_fmt yuv420p -c:a aac -b:a 192k -shortest -r 30 /opt/airflow/output/videos/_tmp/long_184_raw.mp4
+[2026-07-25T04:14:23.841+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T04:14:23.841+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 94, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 69, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 166, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 35, in _run
+    subprocess.run(cmd, check=True, capture_output=True)
+  File "/usr/local/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/long_184.jpg', '-i', '/opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3', '-vf', "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could I leave a message?\u200b':fontcolor=FFFFFF:fontsize=76:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Since Mr. Davis is out of the office, could\u200b\\nI leave a message for him?\u200b':fontcolor=FFD54A:fontsize=68:x=w/2:y=(h-text_h)/2+(h*0.15):text_align=center:line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/long_184_raw.mp4']' returned non-zero exit status 1.
+[2026-07-25T04:14:23.854+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T041422, end_date=20260725T041423
+[2026-07-25T04:14:23.863+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 162 for task build_long_video (Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/long_184.jpg', '-i', '/opt/airflow/output/videos/_tmp/long_184_raw.audio.mp3', '-vf', "scale=1920:1080:force_original_aspect_ratio=increase,crop=1920:1080,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Could I leave a message?\u200b':fontcolor=FFFFFF:fontsize=76:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Since Mr. Davis is out of the office, could\u200b\\nI leave a message for him?\u200b':fontcolor=FFD54A:fontsize=68:x=w/2:y=(h-text_h)/2+(h*0.15):text_align=center:line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/long_184_raw.mp4']' returned non-zero exit status 1.; 215)
+[2026-07-25T04:14:23.892+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-25T04:14:23.923+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T04:14:23.929+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T05:09:56.659+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T05:09:56.704+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T05:09:56.713+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [queued]>
+[2026-07-25T05:09:56.714+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-25T05:09:56.727+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video> on 2026-07-23 12:00:00+00:00
+[2026-07-25T05:09:56.731+0000] {standard_task_runner.py:64} INFO - Started process 3178 to run task
+[2026-07-25T05:09:56.735+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video', 'scheduled__2026-07-23T12:00:00+00:00', '--job-id', '231', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpqh42tl0p']
+[2026-07-25T05:09:56.738+0000] {standard_task_runner.py:91} INFO - Job 231: Subtask build_long_video
+[2026-07-25T05:09:56.830+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video scheduled__2026-07-23T12:00:00+00:00 [running]> on host ce8e21912c19
+[2026-07-25T05:09:57.064+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-23T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-23T12:00:00+00:00'
+[2026-07-25T05:09:57.066+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T05:09:57.766+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:09:57,766 | INFO     | planner.video_planner | Planned LONG video: topic='Travel English', phrases=17
+[2026-07-25T05:09:58.151+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:09:58,151 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_220.mp3
+[2026-07-25T05:09:58.621+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:09:58,621 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_220.mp3
+[2026-07-25T05:09:58.862+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:09:58,862 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_220.jpg
+[2026-07-25T05:10:05.228+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:05,227 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_225.mp3
+[2026-07-25T05:10:05.630+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:05,630 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_225.mp3
+[2026-07-25T05:10:05.810+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:05,810 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_225.jpg
+[2026-07-25T05:10:10.261+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:10,260 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_230.mp3
+[2026-07-25T05:10:10.736+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:10,735 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_230.mp3
+[2026-07-25T05:10:10.952+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:10,951 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_230.jpg
+[2026-07-25T05:10:15.639+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:15,639 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_234.mp3
+[2026-07-25T05:10:16.037+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:16,037 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_234.mp3
+[2026-07-25T05:10:16.200+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:16,200 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_234.jpg
+[2026-07-25T05:10:20.792+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:20,792 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_194.mp3
+[2026-07-25T05:10:21.280+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:21,279 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_194.mp3
+[2026-07-25T05:10:21.500+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:21,493 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_194.jpg
+[2026-07-25T05:10:26.622+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:26,622 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_202.mp3
+[2026-07-25T05:10:27.193+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:27,192 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_202.mp3
+[2026-07-25T05:10:27.611+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:27,611 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_202.jpg
+[2026-07-25T05:10:32.569+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:32,569 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_206.mp3
+[2026-07-25T05:10:33.033+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:33,033 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_206.mp3
+[2026-07-25T05:10:33.590+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:33,590 | INFO     | media.image_downloader | Downloaded background image for scene='taxi' -> /opt/airflow/output/images/long_206.jpg
+[2026-07-25T05:10:38.385+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:38,385 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_210.mp3
+[2026-07-25T05:10:38.852+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:38,852 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_210.mp3
+[2026-07-25T05:10:39.054+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:39,053 | INFO     | media.image_downloader | Downloaded background image for scene='street' -> /opt/airflow/output/images/long_210.jpg
+[2026-07-25T05:10:44.496+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:44,496 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_215.mp3
+[2026-07-25T05:10:44.806+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:44,806 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_215.mp3
+[2026-07-25T05:10:45.728+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:45,727 | INFO     | media.image_downloader | Downloaded background image for scene='subway' -> /opt/airflow/output/images/long_215.jpg
+[2026-07-25T05:10:49.607+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:49,607 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_235.mp3
+[2026-07-25T05:10:50.025+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:50,025 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_235.mp3
+[2026-07-25T05:10:50.333+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:50,333 | INFO     | media.image_downloader | Downloaded background image for scene='taxi' -> /opt/airflow/output/images/long_235.jpg
+[2026-07-25T05:10:55.136+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:55,135 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_237.mp3
+[2026-07-25T05:10:55.666+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:55,666 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_237.mp3
+[2026-07-25T05:10:56.107+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:10:56,107 | INFO     | media.image_downloader | Downloaded background image for scene='street' -> /opt/airflow/output/images/long_237.jpg
+[2026-07-25T05:11:01.243+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:01,243 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_246.mp3
+[2026-07-25T05:11:01.720+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:01,720 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_246.mp3
+[2026-07-25T05:11:01.924+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:01,924 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_246.jpg
+[2026-07-25T05:11:06.353+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:06,352 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_253.mp3
+[2026-07-25T05:11:06.843+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:06,843 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_253.mp3
+[2026-07-25T05:11:07.081+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:07,081 | INFO     | media.image_downloader | Downloaded background image for scene='street' -> /opt/airflow/output/images/long_253.jpg
+[2026-07-25T05:11:11.333+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:11,333 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_257.mp3
+[2026-07-25T05:11:11.755+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:11,755 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_257.mp3
+[2026-07-25T05:11:12.146+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:11:12,146 | INFO     | media.image_downloader | Downloaded background image for scene='bus' -> /opt/airflow/output/images/long_257.jpg
+[2026-07-25T05:11:26.156+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T05:11:26.159+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1025, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 1070, in create_connection
+    sock = await self._connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 974, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "/usr/local/lib/python3.11/asyncio/selector_events.py", line 638, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 581, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 944, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1226, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1022, in _wrap_create_connection
+    async with ceil_timeout(
+  File "/usr/local/lib/python3.11/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 94, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 56, in run
+    audio = self.tts.generate_for_phrase(phrase.id, phrase.phrase, phrase.example)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 50, in generate_for_phrase
+    "phrase_audio": self.generate_phrase_audio(phrase_id, phrase),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 42, in generate_phrase_audio
+    return synthesize_sync(text, self.phrase_voice, out_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 28, in synthesize_sync
+    asyncio.run(_synthesize(text, voice, out_path))
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 23, in _synthesize
+    await communicate.save(str(out_path))
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 613, in save
+    async for message in self.stream():
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 588, in stream
+    async for message in self.__stream():
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 461, in __stream
+    async with aiohttp.ClientSession(
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 1197, in __aenter__
+    self._resp = await self._coro
+                 ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 835, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 585, in _request
+    raise ServerTimeoutError(
+aiohttp.client_exceptions.ServerTimeoutError: Connection timeout to host wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=ca2b1a7477de4266a7998727156b31b0&Sec-MS-GEC=3FAA83669405A56F499CF596112861FBBB41FD7916FD24BDFC8472462FB55C24&Sec-MS-GEC-Version=1-143.0.3650.75
+[2026-07-25T05:11:26.234+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video, run_id=scheduled__2026-07-23T12:00:00+00:00, execution_date=20260723T120000, start_date=20260725T050956, end_date=20260725T051126
+[2026-07-25T05:11:26.254+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 231 for task build_long_video (Connection timeout to host wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=ca2b1a7477de4266a7998727156b31b0&Sec-MS-GEC=3FAA83669405A56F499CF596112861FBBB41FD7916FD24BDFC8472462FB55C24&Sec-MS-GEC-Version=1-143.0.3650.75; 3178)
+[2026-07-25T05:11:26.292+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-25T05:11:26.320+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T05:11:26.324+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

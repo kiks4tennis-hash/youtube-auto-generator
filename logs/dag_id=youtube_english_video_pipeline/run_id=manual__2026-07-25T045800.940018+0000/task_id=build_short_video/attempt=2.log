@@ -1,0 +1,76 @@
+[2026-07-25T05:03:06.711+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T05:03:06.770+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T04:58:00.940018+00:00 [queued]>
+[2026-07-25T05:03:06.782+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T04:58:00.940018+00:00 [queued]>
+[2026-07-25T05:03:06.796+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2026-07-25T05:03:06.816+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video> on 2026-07-25 04:58:00.940018+00:00
+[2026-07-25T05:03:06.825+0000] {standard_task_runner.py:64} INFO - Started process 314 to run task
+[2026-07-25T05:03:06.831+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video', 'manual__2026-07-25T04:58:00.940018+00:00', '--job-id', '219', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp0ck4ykvu']
+[2026-07-25T05:03:06.835+0000] {standard_task_runner.py:91} INFO - Job 219: Subtask build_short_video
+[2026-07-25T05:03:06.962+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T04:58:00.940018+00:00 [running]> on host ce8e21912c19
+[2026-07-25T05:03:07.266+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-25T04:58:00.940018+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-25T04:58:00.940018+00:00'
+[2026-07-25T05:03:07.269+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T05:03:08.072+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:03:08,072 | INFO     | planner.video_planner | Planned SHORT video: topic='Hotel English', phrases=1
+[2026-07-25T05:03:08.413+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:03:08,413 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_90.mp3
+[2026-07-25T05:03:08.676+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:03:08,676 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_90.mp3
+[2026-07-25T05:03:08.928+0000] {logging_mixin.py:188} INFO - 2026-07-25 05:03:08,928 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/short_90.jpg
+[2026-07-25T05:03:09.504+0000] {logging_mixin.py:188} INFO - FFmpeg STDOUT:
+[2026-07-25T05:03:09.506+0000] {logging_mixin.py:188} INFO -  
+[2026-07-25T05:03:09.507+0000] {logging_mixin.py:188} INFO - FFmpeg STDERR:
+[2026-07-25T05:03:09.508+0000] {logging_mixin.py:188} INFO -  ffmpeg version 5.1.9-0+deb12u1 Copyright (c) 2000-2026 the FFmpeg developers
+  built with gcc 12 (Debian 12.2.0-14+deb12u1)
+  configuration: --prefix=/usr --extra-version=0+deb12u1 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --enable-gnutls --enable-ladspa --enable-libaom --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libjack --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librabbitmq --enable-librist --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-libzmq --enable-libzvbi --enable-lv2 --enable-omx --enable-openal --enable-opencl --enable-opengl --enable-sdl2 --disable-sndio --enable-libjxl --enable-pocketsphinx --enable-librsvg --enable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libx264 --enable-libplacebo --enable-librav1e --enable-shared
+  libavutil      57. 28.100 / 57. 28.100
+  libavcodec     59. 37.100 / 59. 37.100
+  libavformat    59. 27.100 / 59. 27.100
+  libavdevice    59.  7.100 / 59.  7.100
+  libavfilter     8. 44.100 /  8. 44.100
+  libswscale      6.  7.100 /  6.  7.100
+  libswresample   4.  7.100 /  4.  7.100
+  libpostproc    56.  6.100 / 56.  6.100
+Input #0, image2, from '/opt/airflow/output/images/short_90.jpg':
+  Duration: 00:00:00.04, start: 0.000000, bitrate: 23171 kb/s
+  Stream #0:0: Video: mjpeg (Baseline), yuvj420p(pc, bt470bg/unknown/unknown), 975x1300, 25 fps, 25 tbr, 25 tbn
+Input #1, mp3, from '/opt/airflow/output/videos/_tmp/short_90_raw.audio.mp3':
+  Metadata:
+    encoder         : Lavf59.27.100
+  Duration: 00:00:07.80, start: 0.046042, bitrate: 32 kb/s
+  Stream #1:0: Audio: mp3, 24000 Hz, mono, fltp, 32 kb/s
+[AVFilterGraph @ 0x6390e832f6c0] No such filter: 'please. :fontcolor=FFFFFF:fontsize=88:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile=/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf:text=Hello'
+Error initializing complex filters.
+Invalid argument
+[2026-07-25T05:03:09.512+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T05:03:09.513+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 64, in task_build_short_video
+    result = build_short_video()
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/short_video.py", line 91, in build_short_video
+    result = ShortVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/short_video.py", line 59, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 114, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 41, in _run
+    raise subprocess.CalledProcessError(
+subprocess.CalledProcessError: Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/short_90.jpg', '-i', '/opt/airflow/output/videos/_tmp/short_90_raw.audio.mp3', '-filter_complex', "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\\'d like to check \\\\nin, please. ':fontcolor=FFFFFF:fontsize=88:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Hello, I\\'d like to check \\\\nin, please， my name is \\\\nSarah Jenkins. ':fontcolor=FFD54A:fontsize=79:x=w/2:y=(h*0.45):text_align=center:line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/short_90_raw.mp4']' returned non-zero exit status 1.
+[2026-07-25T05:03:09.587+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_short_video, run_id=manual__2026-07-25T04:58:00.940018+00:00, execution_date=20260725T045800, start_date=20260725T050306, end_date=20260725T050309
+[2026-07-25T05:03:09.604+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 219 for task build_short_video (Command '['ffmpeg', '-y', '-loop', '1', '-i', '/opt/airflow/output/images/short_90.jpg', '-i', '/opt/airflow/output/videos/_tmp/short_90_raw.audio.mp3', '-filter_complex', "[0:v]scale=1080:1920:force_original_aspect_ratio=increase,crop=1080:1920,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='I\\'d like to check \\\\nin, please. ':fontcolor=FFFFFF:fontsize=88:x=w/2:y=(h*0.16):text_align=center:line_spacing=12:box=1:boxcolor=black@0.45:boxborderw=12,drawtext=fontfile='/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf':text='Hello, I\\'d like to check \\\\nin, please， my name is \\\\nSarah Jenkins. ':fontcolor=FFD54A:fontsize=79:x=w/2:y=(h*0.45):text_align=center:line_spacing=16:box=1:boxcolor=black@0.55:boxborderw=16", '-c:v', 'libx264', '-preset', 'medium', '-crf', '23', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-b:a', '192k', '-shortest', '-r', '30', '/opt/airflow/output/videos/_tmp/short_90_raw.mp4']' returned non-zero exit status 1.; 314)
+[2026-07-25T05:03:09.654+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-07-25T05:03:09.679+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-25T05:03:09.683+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

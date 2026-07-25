@@ -1,0 +1,56 @@
+[2026-07-25T01:32:17.558+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-25T01:32:17.619+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T01:15:55.579264+00:00 [queued]>
+[2026-07-25T01:32:17.636+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T01:15:55.579264+00:00 [queued]>
+[2026-07-25T01:32:17.638+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 4
+[2026-07-25T01:32:17.661+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video> on 2026-07-25 01:15:55.579264+00:00
+[2026-07-25T01:32:17.671+0000] {standard_task_runner.py:64} INFO - Started process 798 to run task
+[2026-07-25T01:32:17.676+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video', 'manual__2026-07-25T01:15:55.579264+00:00', '--job-id', '108', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp2ao4lune']
+[2026-07-25T01:32:17.874+0000] {standard_task_runner.py:91} INFO - Job 108: Subtask build_short_video
+[2026-07-25T01:32:18.095+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video manual__2026-07-25T01:15:55.579264+00:00 [running]> on host 654b8331d764
+[2026-07-25T01:32:18.722+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video' AIRFLOW_CTX_EXECUTION_DATE='2026-07-25T01:15:55.579264+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-25T01:15:55.579264+00:00'
+[2026-07-25T01:32:18.860+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-25T01:32:27.957+0000] {local_task_job_runner.py:313} WARNING - State of this instance has been externally set to None. Terminating instance.
+[2026-07-25T01:32:27.991+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-25T01:32:28.026+0000] {process_utils.py:132} INFO - Sending 15 to group 798. PIDs of all processes in the group: [798]
+[2026-07-25T01:32:28.051+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 798
+[2026-07-25T01:32:28.129+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-07-25T01:32:28.159+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-25T01:32:28.182+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 62, in task_build_short_video
+    from video.short_video import build_short_video
+  File "/opt/airflow/src/video/short_video.py", line 12, in <module>
+    from generators.metadata_generator import MetadataGenerator
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1026, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1148, in path_stats
+  File "<frozen importlib._bootstrap_external>", line 147, in _path_stat
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-07-25T01:32:29.431+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_short_video, run_id=manual__2026-07-25T01:15:55.579264+00:00, execution_date=20260725T011555, start_date=20260725T013217, end_date=20260725T013229
+[2026-07-25T01:32:29.487+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 108 for task build_short_video ((psycopg2.errors.ForeignKeyViolation) insert or update on table "task_fail" violates foreign key constraint "task_fail_ti_fkey"
+DETAIL:  Key (dag_id, task_id, run_id, map_index)=(youtube_english_video_pipeline, build_short_video, manual__2026-07-25T01:15:55.579264+00:00, -1) is not present in table "task_instance".
+
+[SQL: INSERT INTO task_fail (task_id, dag_id, run_id, map_index, start_date, end_date, duration) VALUES (%(task_id)s, %(dag_id)s, %(run_id)s, %(map_index)s, %(start_date)s, %(end_date)s, %(duration)s) RETURNING task_fail.id]
+[parameters: {'task_id': 'build_short_video', 'dag_id': 'youtube_english_video_pipeline', 'run_id': 'manual__2026-07-25T01:15:55.579264+00:00', 'map_index': -1, 'start_date': datetime.datetime(2026, 7, 25, 1, 32, 17, 620378, tzinfo=Timezone('UTC')), 'end_date': datetime.datetime(2026, 7, 25, 1, 32, 29, 429734, tzinfo=Timezone('UTC')), 'duration': 11}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj); 798)
+[2026-07-25T01:32:29.609+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=798, status='terminated', exitcode=1, started='01:32:17') (798) terminated with exit code 1

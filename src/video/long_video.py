@@ -12,7 +12,6 @@ from config.settings import settings
 from database.repository import Phrase, Repository, VideoRecord
 from generators.metadata_generator import MetadataGenerator
 from media.image_downloader import ImageDownloader
-from media.subtitle_generator import SubtitleCue, SubtitleGenerator
 from media.thumbnail_builder import ThumbnailBuilder
 from planner.video_planner import VideoPlanner
 from tts.edge_tts import TTSGenerator
@@ -39,7 +38,6 @@ class LongVideoPipeline:
         self.planner = VideoPlanner(self.repository)
         self.tts = TTSGenerator()
         self.images = ImageDownloader()
-        self.subtitles = SubtitleGenerator()
         self.metadata_gen = MetadataGenerator()
         self.thumbnails = ThumbnailBuilder()
         self.builder = VideoBuilder(video_type="long")
@@ -52,8 +50,6 @@ class LongVideoPipeline:
         tmp_dir.mkdir(parents=True, exist_ok=True)
 
         segment_paths: list[Path] = []
-        all_cues: list[SubtitleCue] = []
-        cursor = 0.0
         first_image: Path | None = None
 
         for phrase in phrases:
@@ -73,13 +69,6 @@ class LongVideoPipeline:
             self.builder.render_segment(segment, raw_segment_path)
             segment_paths.append(raw_segment_path)
 
-            cues, duration = self.subtitles.build_segment_cues(
-                phrase.id, phrase.phrase, phrase.example,
-                audio["phrase_audio"], audio["example_audio"], offset=cursor,
-            )
-            all_cues.extend(cues)
-            cursor += duration
-
         # 動画IDが先に必要な命名のため、DB挿入は結合前に仮払い出しはせず、
         # 一時IDとしてplanの先頭phrase.idを使ってファイル名を決める
         provisional_id = phrases[0].id
@@ -87,10 +76,8 @@ class LongVideoPipeline:
         concatenated_path = tmp_dir / f"long_{provisional_id}_concat.mp4"
         self.builder.concat_segments(segment_paths, concatenated_path)
 
-        srt_path = self.subtitles.build_video_srt("long", provisional_id, all_cues)
-
         final_path = settings.output_dir / "videos" / f"long_{provisional_id}.mp4"
-        self.builder.finalize(concatenated_path, srt_path, final_path)
+        self.builder.finalize(concatenated_path, final_path)
 
         metadata = self.metadata_gen.generate("long", plan.topic, phrases)
 
