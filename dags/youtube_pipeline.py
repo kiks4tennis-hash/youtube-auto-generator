@@ -34,6 +34,8 @@ from airflow.operators.python import PythonOperator, ShortCircuitOperator
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SRC_PATH = str(PROJECT_ROOT / "src")
 ROOT_PATH = str(PROJECT_ROOT)
+VIDEO_REPEAT_COUNT = int(os.getenv("VIDEO_REPEAT_COUNT", "10"))
+
 for p in (SRC_PATH, ROOT_PATH):
     if p not in sys.path:
         sys.path.insert(0, p)
@@ -66,13 +68,23 @@ def task_build_short_video(**context):
     return result
 
 
-def task_upload_short_video(**context):
+# def task_upload_short_video(**context):
+#     from uploader.youtube_uploader import upload_video
+
+#     result = context["ti"].xcom_pull(task_ids="build_short_video", key="short_video_result")
+#     youtube_id = upload_video(result)
+#     return youtube_id
+
+def task_upload_short_video(build_task_id: str, **context):
     from uploader.youtube_uploader import upload_video
 
-    result = context["ti"].xcom_pull(task_ids="build_short_video", key="short_video_result")
+    result = context["ti"].xcom_pull(
+        task_ids=build_task_id,
+        key="short_video_result",
+    )
+
     youtube_id = upload_video(result)
     return youtube_id
-
 
 def task_should_build_long_video(**context) -> bool:
     """
@@ -96,13 +108,24 @@ def task_build_long_video(**context):
     return result
 
 
-def task_upload_long_video(**context):
+# def task_upload_long_video(**context):
+#     from uploader.youtube_uploader import upload_video
+
+#     result = context["ti"].xcom_pull(task_ids="build_long_video", key="long_video_result")
+#     youtube_id = upload_video(result)
+#     return youtube_id
+
+
+def task_upload_long_video(build_task_id: str, **context):
     from uploader.youtube_uploader import upload_video
 
-    result = context["ti"].xcom_pull(task_ids="build_long_video", key="long_video_result")
+    result = context["ti"].xcom_pull(
+        task_ids=build_task_id,
+        key="long_video_result",
+    )
+
     youtube_id = upload_video(result)
     return youtube_id
-
 
 # ---------------------------------------------------------------
 # DAG定義
@@ -119,38 +142,104 @@ with DAG(
     tags=["youtube", "english", "content-automation"],
 ) as dag:
 
-    ensure_phrase_inventory = PythonOperator(
-        task_id="ensure_phrase_inventory",
-        python_callable=task_ensure_phrase_inventory,
-    )
 
-    build_short_video = PythonOperator(
-        task_id="build_short_video",
-        python_callable=task_build_short_video,
-    )
+    video_sets = []
 
-    upload_short_video = PythonOperator(
-        task_id="upload_short_video",
-        python_callable=task_upload_short_video,
-    )
+    for i in range(1, VIDEO_REPEAT_COUNT + 1): # ここでループ回数の変更可能
 
-    should_build_long_video = ShortCircuitOperator(
-        task_id="should_build_long_video",
-        python_callable=task_should_build_long_video,
-    )
+        ensure_task = PythonOperator(
+            task_id=f"ensure_phrase_inventory_{i}",
+            python_callable=task_ensure_phrase_inventory,
+        )
 
-    build_long_video = PythonOperator(
-        task_id="build_long_video",
-        python_callable=task_build_long_video,
-    )
+        short_build_task = PythonOperator(
+            task_id=f"build_short_video_{i}",
+            python_callable=task_build_short_video,
+        )
 
-    upload_long_video = PythonOperator(
-        task_id="upload_long_video",
-        python_callable=task_upload_long_video,
-    )
+        short_upload_task = PythonOperator(
+            task_id=f"upload_short_video_{i}",
+            python_callable=task_upload_short_video,
+            op_kwargs={
+                "build_task_id": f"build_short_video_{i}",
+            },
+        )
+
+        long_build_task = PythonOperator(
+            task_id=f"build_long_video_{i}",
+            python_callable=task_build_long_video,
+        )
+
+        long_upload_task = PythonOperator(
+            task_id=f"upload_long_video_{i}",
+            python_callable=task_upload_long_video,
+            op_kwargs={
+                "build_task_id": f"build_long_video_{i}",
+            },
+        )
+
+        ensure_task >> short_build_task
+        short_build_task >> short_upload_task
+        short_upload_task >> long_build_task
+        long_build_task >> long_upload_task
+
+        video_sets.append(
+            (
+                ensure_task,
+                short_build_task,
+                short_upload_task,
+                long_build_task,
+                long_upload_task,
+            )
+        )
+
+    # ensure_phrase_inventory = PythonOperator(
+    #     task_id="ensure_phrase_inventory",
+    #     python_callable=task_ensure_phrase_inventory,
+    # )
+
+    # build_short_video = PythonOperator(
+    #     task_id="build_short_video",
+    #     python_callable=task_build_short_video,
+    # )
+
+    # upload_short_video = PythonOperator(
+    #     task_id="upload_short_video",
+    #     python_callable=task_upload_short_video,
+    # )
+
+    # should_build_long_video = ShortCircuitOperator(
+    #     task_id="should_build_long_video",
+    #     python_callable=task_should_build_long_video,
+    # )
+
+    # build_long_video = PythonOperator(
+    #     task_id="build_long_video",
+    #     python_callable=task_build_long_video,
+    # )
+
+    # upload_long_video = PythonOperator(
+    #     task_id="upload_long_video",
+    #     python_callable=task_upload_long_video,
+    # )
+
+    # ensure_phrase_inventory >> video_tasks[0][0]
+
+    for i in range(len(video_sets) - 1):
+
+        # 今回の最後(Long Upload)
+        current_last = video_sets[i][-1]
+
+        # 次回の最初(Ensure Inventory)
+        next_first = video_sets[i + 1][0]
+
+        current_last >> next_first
+        for i in range(len(video_sets) - 1):
+            video_sets[i][-1] >> video_sets[i + 1][0]
+
 
     # フレーズ在庫確保 -> Short動画生成・アップロード
-    ensure_phrase_inventory >> build_short_video >> upload_short_video
+    # ensure_phrase_inventory >> build_short_video >> upload_short_video
 
     # フレーズ在庫確保 -> (曜日条件) -> Long動画生成・アップロード
-    ensure_phrase_inventory >> should_build_long_video >> build_long_video >> upload_long_video
+    # ensure_phrase_inventory >> should_build_long_video >> build_long_video >> upload_long_video
