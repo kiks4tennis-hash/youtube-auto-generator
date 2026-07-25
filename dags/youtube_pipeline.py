@@ -67,14 +67,6 @@ def task_build_short_video(**context):
     context["ti"].xcom_push(key="short_video_result", value=result)
     return result
 
-
-# def task_upload_short_video(**context):
-#     from uploader.youtube_uploader import upload_video
-
-#     result = context["ti"].xcom_pull(task_ids="build_short_video", key="short_video_result")
-#     youtube_id = upload_video(result)
-#     return youtube_id
-
 def task_upload_short_video(build_task_id: str, **context):
     from uploader.youtube_uploader import upload_video
 
@@ -106,14 +98,6 @@ def task_build_long_video(**context):
     result = build_long_video()
     context["ti"].xcom_push(key="long_video_result", value=result)
     return result
-
-
-# def task_upload_long_video(**context):
-#     from uploader.youtube_uploader import upload_video
-
-#     result = context["ti"].xcom_pull(task_ids="build_long_video", key="long_video_result")
-#     youtube_id = upload_video(result)
-#     return youtube_id
 
 
 def task_upload_long_video(build_task_id: str, **context):
@@ -193,38 +177,6 @@ with DAG(
             )
         )
 
-    # ensure_phrase_inventory = PythonOperator(
-    #     task_id="ensure_phrase_inventory",
-    #     python_callable=task_ensure_phrase_inventory,
-    # )
-
-    # build_short_video = PythonOperator(
-    #     task_id="build_short_video",
-    #     python_callable=task_build_short_video,
-    # )
-
-    # upload_short_video = PythonOperator(
-    #     task_id="upload_short_video",
-    #     python_callable=task_upload_short_video,
-    # )
-
-    # should_build_long_video = ShortCircuitOperator(
-    #     task_id="should_build_long_video",
-    #     python_callable=task_should_build_long_video,
-    # )
-
-    # build_long_video = PythonOperator(
-    #     task_id="build_long_video",
-    #     python_callable=task_build_long_video,
-    # )
-
-    # upload_long_video = PythonOperator(
-    #     task_id="upload_long_video",
-    #     python_callable=task_upload_long_video,
-    # )
-
-    # ensure_phrase_inventory >> video_tasks[0][0]
-
     for i in range(len(video_sets) - 1):
 
         # 今回の最後(Long Upload)
@@ -236,10 +188,3 @@ with DAG(
         current_last >> next_first
         for i in range(len(video_sets) - 1):
             video_sets[i][-1] >> video_sets[i + 1][0]
-
-
-    # フレーズ在庫確保 -> Short動画生成・アップロード
-    # ensure_phrase_inventory >> build_short_video >> upload_short_video
-
-    # フレーズ在庫確保 -> (曜日条件) -> Long動画生成・アップロード
-    # ensure_phrase_inventory >> should_build_long_video >> build_long_video >> upload_long_video

@@ -107,24 +107,52 @@ class PhraseGenerator:
         return inserted
 
 
-def ensure_phrase_inventory() -> int:
+# def ensure_phrase_inventory() -> int:
+#     """
+#     Airflowタスクから呼ばれるエントリポイント。
+#     在庫が閾値を下回っていればGeminiで補充する。返り値: 実際に生成した件数（0の場合は補充不要）。
+#     """
+#     repo = Repository()
+#     current_count = repo.count_unused_phrases()
+#     threshold = settings.pipeline.phrase_inventory_threshold
+#     logger.info(f"Unused phrase inventory: {current_count} (threshold={threshold})")
+
+#     if current_count >= threshold:
+#         logger.info("Inventory sufficient. Skipping generation.")
+#         return 0
+
+#     batch = settings.pipeline.phrase_generation_batch
+#     generator = PhraseGenerator(repository=repo)
+#     return generator.generate_and_store(batch)
+
+def ensure_phrase_inventory(required_count: int = 1) -> int:
     """
     Airflowタスクから呼ばれるエントリポイント。
-    在庫が閾値を下回っていればGeminiで補充する。返り値: 実際に生成した件数（0の場合は補充不要）。
+    在庫が閾値を下回っていればGeminiで補充する。
+    
+    ※ required_count: 今回のタスクで最低限必要となるフレーズ数（デフォルト1）
     """
     repo = Repository()
     current_count = repo.count_unused_phrases()
     threshold = settings.pipeline.phrase_inventory_threshold
     logger.info(f"Unused phrase inventory: {current_count} (threshold={threshold})")
 
-    if current_count >= threshold:
-        logger.info("Inventory sufficient. Skipping generation.")
-        return 0
+    # 在庫が「閾値」または「今回の必要数」を下回っていたら強制補充
+    if current_count < threshold or current_count < required_count:
+        logger.info(f"Inventory low ({current_count}). Generating new phrases...")
+        batch = settings.pipeline.phrase_generation_batch
+        generator = PhraseGenerator(repository=repo)
+        
+        inserted = generator.generate_and_store(batch)
+        
+        # 【重要】もしGemini生成に失敗して1件も追加できず、かつ在庫が1件もない場合は例外を投げてAirflowを止める
+        if current_count + inserted < required_count:
+            raise RuntimeError(f"Failed to secure enough phrases. Current: {current_count}, Inserted: {inserted}")
+            
+        return inserted
 
-    batch = settings.pipeline.phrase_generation_batch
-    generator = PhraseGenerator(repository=repo)
-    return generator.generate_and_store(batch)
-
+    logger.info("Inventory sufficient. Skipping generation.")
+    return 0
 
 if __name__ == "__main__":
     ensure_phrase_inventory()
