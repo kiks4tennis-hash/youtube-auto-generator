@@ -5,6 +5,7 @@ Long-form Video (16:9, 15〜30フレーズ) の生成フロー。
 
 from __future__ import annotations
 
+import random
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -81,11 +82,16 @@ class LongVideoPipeline:
 
         metadata = self.metadata_gen.generate("long", plan.topic, phrases)
 
+        # サムネイルの「フックバッジ」には実際の例文を使い、動画内容を予感させて
+        # 好奇心を刺激する（例: "ACTUALLY, CAN I GET A TO-GO BOX?"）
+        hook_source = random.choice(phrases)
+
         thumbnail_path = self.thumbnails.build(
             video_id=provisional_id,
             main_title=f"{len(phrases)} Daily English Expressions",
             sub_title=plan.topic,
             background_image=first_image,
+            hook_phrase=hook_source.example,
         )
 
         video_record = VideoRecord(

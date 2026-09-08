@@ -1,0 +1,56 @@
+[2026-08-03T00:56:06.099+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-03T00:56:06.131+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video_1 scheduled__2026-08-01T12:00:00+00:00 [queued]>
+[2026-08-03T00:56:06.138+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video_1 scheduled__2026-08-01T12:00:00+00:00 [queued]>
+[2026-08-03T00:56:06.138+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-08-03T00:56:06.151+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): upload_short_video_1> on 2026-08-01 12:00:00+00:00
+[2026-08-03T00:56:06.157+0000] {standard_task_runner.py:64} INFO - Started process 75017 to run task
+[2026-08-03T00:56:06.159+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'upload_short_video_1', 'scheduled__2026-08-01T12:00:00+00:00', '--job-id', '601', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpu83g5wfx']
+[2026-08-03T00:56:06.161+0000] {standard_task_runner.py:91} INFO - Job 601: Subtask upload_short_video_1
+[2026-08-03T00:56:06.232+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.upload_short_video_1 scheduled__2026-08-01T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-08-03T00:56:06.446+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='upload_short_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-08-01T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-08-01T12:00:00+00:00'
+[2026-08-03T00:56:06.447+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-03T00:56:07.027+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-03T00:56:07.030+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 78, in task_upload_short_video
+    youtube_id = upload_video(result)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 150, in upload_video
+    return uploader.upload(req)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 90, in upload
+    youtube = self._client()
+              ^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 82, in _client
+    creds = self._get_credentials()
+            ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/uploader/youtube_uploader.py", line 63, in _get_credentials
+    creds.refresh(Request())
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/oauth2/credentials.py", line 431, in refresh
+    ) = reauth.refresh_grant(
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/oauth2/reauth.py", line 366, in refresh_grant
+    _client._handle_error_response(response_data, retryable_error)
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/oauth2/_client.py", line 68, in _handle_error_response
+    raise exceptions.RefreshError(
+google.auth.exceptions.RefreshError: ('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'})
+[2026-08-03T00:56:07.086+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=upload_short_video_1, run_id=scheduled__2026-08-01T12:00:00+00:00, execution_date=20260801T120000, start_date=20260803T005606, end_date=20260803T005607
+[2026-08-03T00:56:07.100+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 601 for task upload_short_video_1 (('invalid_grant: Token has been expired or revoked.', {'error': 'invalid_grant', 'error_description': 'Token has been expired or revoked.'}); 75017)
+[2026-08-03T00:56:07.136+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-08-03T00:56:07.313+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-08-03T00:56:07.319+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

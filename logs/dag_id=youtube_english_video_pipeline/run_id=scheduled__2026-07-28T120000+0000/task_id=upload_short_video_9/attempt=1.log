@@ -1,0 +1,20 @@
+[2026-07-29T23:50:54.788+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-29T23:50:54.873+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video_9 scheduled__2026-07-28T12:00:00+00:00 [queued]>
+[2026-07-29T23:50:54.913+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.upload_short_video_9 scheduled__2026-07-28T12:00:00+00:00 [queued]>
+[2026-07-29T23:50:54.926+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-29T23:50:54.963+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): upload_short_video_9> on 2026-07-28 12:00:00+00:00
+[2026-07-29T23:50:54.974+0000] {standard_task_runner.py:64} INFO - Started process 67886 to run task
+[2026-07-29T23:50:54.979+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'upload_short_video_9', 'scheduled__2026-07-28T12:00:00+00:00', '--job-id', '580', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpzg8dv4id']
+[2026-07-29T23:50:54.991+0000] {standard_task_runner.py:91} INFO - Job 580: Subtask upload_short_video_9
+[2026-07-29T23:50:55.214+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.upload_short_video_9 scheduled__2026-07-28T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-07-29T23:50:55.597+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='upload_short_video_9' AIRFLOW_CTX_EXECUTION_DATE='2026-07-28T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-28T12:00:00+00:00'
+[2026-07-29T23:50:55.611+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-29T23:50:57.311+0000] {__init__.py:49} INFO - file_cache is only supported with oauth2client<4.0.0
+[2026-07-29T23:50:57.341+0000] {logging_mixin.py:188} INFO - 2026-07-29 23:50:57,340 | INFO     | uploader.youtube_uploader | Uploading video 'Daily English Phrase | Airport English' (/opt/airflow/output/videos/short_1394.mp4) to YouTube...
+[2026-07-29T23:51:00.168+0000] {logging_mixin.py:188} INFO - 2026-07-29 23:51:00,168 | INFO     | uploader.youtube_uploader | Upload complete. YouTube video id = 07jpLlYT6Oc
+[2026-07-29T23:51:00.194+0000] {python.py:237} INFO - Done. Returned value was: 07jpLlYT6Oc
+[2026-07-29T23:51:00.196+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-29T23:51:00.243+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=upload_short_video_9, run_id=scheduled__2026-07-28T12:00:00+00:00, execution_date=20260728T120000, start_date=20260729T235054, end_date=20260729T235100
+[2026-07-29T23:51:00.289+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-29T23:51:00.493+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-29T23:51:00.506+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

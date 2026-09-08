@@ -1,0 +1,94 @@
+[2026-07-29T12:49:21.189+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-29T12:49:21.266+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_6 scheduled__2026-07-28T12:00:00+00:00 [queued]>
+[2026-07-29T12:49:21.290+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_6 scheduled__2026-07-28T12:00:00+00:00 [queued]>
+[2026-07-29T12:49:21.293+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-29T12:49:21.321+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video_6> on 2026-07-28 12:00:00+00:00
+[2026-07-29T12:49:21.333+0000] {standard_task_runner.py:64} INFO - Started process 56448 to run task
+[2026-07-29T12:49:21.339+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video_6', 'scheduled__2026-07-28T12:00:00+00:00', '--job-id', '565', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpfhiuxt46']
+[2026-07-29T12:49:21.347+0000] {standard_task_runner.py:91} INFO - Job 565: Subtask build_long_video_6
+[2026-07-29T12:49:21.508+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video_6 scheduled__2026-07-28T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-07-29T12:49:21.894+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video_6' AIRFLOW_CTX_EXECUTION_DATE='2026-07-28T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-28T12:00:00+00:00'
+[2026-07-29T12:49:21.898+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-29T12:49:23.819+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:23,818 | INFO     | planner.video_planner | Only 13 phrases for topic='Business English', topping up without topic filter
+[2026-07-29T12:49:23.837+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:23,837 | INFO     | planner.video_planner | Planned LONG video: topic='Mixed English Expressions', phrases=20
+[2026-07-29T12:49:24.496+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:24,496 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1308.mp3
+[2026-07-29T12:49:25.183+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:25,182 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1308.mp3
+[2026-07-29T12:49:26.405+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:26,405 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_1308.jpg
+[2026-07-29T12:49:34.697+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:34,697 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1314.mp3
+[2026-07-29T12:49:35.472+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:35,472 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1314.mp3
+[2026-07-29T12:49:36.186+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:36,185 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_1314.jpg
+[2026-07-29T12:49:45.983+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:45,982 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1338.mp3
+[2026-07-29T12:49:46.614+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:46,614 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1338.mp3
+[2026-07-29T12:49:47.546+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:47,545 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_1338.jpg
+[2026-07-29T12:49:56.145+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:56,144 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1317.mp3
+[2026-07-29T12:49:56.833+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:56,832 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1317.mp3
+[2026-07-29T12:49:57.326+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:49:57,326 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_1317.jpg
+[2026-07-29T12:50:04.764+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:04,764 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1318.mp3
+[2026-07-29T12:50:05.506+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:05,506 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1318.mp3
+[2026-07-29T12:50:06.322+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:06,322 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_1318.jpg
+[2026-07-29T12:50:11.986+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:11,986 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1321.mp3
+[2026-07-29T12:50:12.629+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:12,628 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1321.mp3
+[2026-07-29T12:50:13.204+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:13,204 | INFO     | media.image_downloader | Downloaded background image for scene='traffic' -> /opt/airflow/output/images/long_1321.jpg
+[2026-07-29T12:50:20.662+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:20,662 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1322.mp3
+[2026-07-29T12:50:21.227+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:21,227 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1322.mp3
+[2026-07-29T12:50:22.124+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:22,124 | INFO     | media.image_downloader | Downloaded background image for scene='cafe' -> /opt/airflow/output/images/long_1322.jpg
+[2026-07-29T12:50:29.521+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:29,521 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1325.mp3
+[2026-07-29T12:50:30.175+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:30,175 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1325.mp3
+[2026-07-29T12:50:30.769+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:30,769 | INFO     | media.image_downloader | Downloaded background image for scene='airport' -> /opt/airflow/output/images/long_1325.jpg
+[2026-07-29T12:50:37.182+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:37,182 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1326.mp3
+[2026-07-29T12:50:38.396+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:38,396 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1326.mp3
+[2026-07-29T12:50:39.477+0000] {logging_mixin.py:188} INFO - 2026-07-29 12:50:39,477 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_1326.jpg
+[2026-07-29T23:32:05.452+0000] {local_task_job_runner.py:313} WARNING - State of this instance has been externally set to up_for_retry. Terminating instance.
+[2026-07-29T23:32:05.537+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-07-29T23:32:05.644+0000] {process_utils.py:132} INFO - Sending 15 to group 56448. PIDs of all processes in the group: [57695, 56448]
+[2026-07-29T23:32:05.722+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 56448
+[2026-07-29T23:32:05.805+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-07-29T23:32:06.188+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-29T23:32:06.207+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=57695, status='terminated', started='12:50:39') (57695) terminated with exit code None
+[2026-07-29T23:32:06.891+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 98, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 69, in run
+    self.builder.render_segment(segment, raw_segment_path)
+  File "/opt/airflow/src/video/video_builder.py", line 160, in render_segment
+    _run(cmd)
+  File "/opt/airflow/src/video/video_builder.py", line 37, in _run
+    result = subprocess.run(cmd, capture_output=True, text=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/subprocess.py", line 2115, in _communicate
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-07-29T23:32:10.063+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video_6, run_id=scheduled__2026-07-28T12:00:00+00:00, execution_date=20260728T120000, start_date=20260729T124921, end_date=20260729T233209
+[2026-07-29T23:32:10.787+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=56448, status='terminated', exitcode=2, started='12:49:20') (56448) terminated with exit code 2
