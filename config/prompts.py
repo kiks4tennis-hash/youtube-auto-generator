@@ -30,8 +30,8 @@ in exactly this shape:
 """
 
 METADATA_GENERATION_PROMPT = """\
-You are a YouTube SEO copywriter for an English-learning channel called \
-"Taky's Language School".
+You are a YouTube SEO copywriter and thumbnail strategist for an \
+English-learning channel called "Taky's Language School".
 
 Video type: {video_type}
 Topic: {topic}
@@ -42,11 +42,30 @@ Write metadata that will help this video reach English learners searching for \
 practical spoken-English content. Keep the title under 90 characters and the \
 description under 800 characters.
 
+Also write a "hook_phrase": a short line of text for the video's THUMBNAIL badge \
+(not the title, not the description). Its only job is to make someone stop \
+scrolling and click. Base it on the specific phrases above, and lean into the \
+anxieties learners actually have: embarrassing mistakes, ordering/asking for \
+something the wrong way, sounding awkward or too textbook-ish, a gap most \
+courses never teach. Concretely, do ONE of these:
+  - Quote or lightly adapt the single most surprising/useful example sentence \
+from the phrases above, framed as something the viewer might be getting wrong \
+(e.g. "STOP SAYING 'I AM FINE'", "ARE YOU ORDERING COFFEE WRONG?")
+  - State a specific, punchy claim tied to the topic (e.g. "MOST LEARNERS SKIP \
+PHRASE #3", "NATIVES NEVER SAY THIS AT A HOTEL")
+Rules for hook_phrase:
+  - Under 60 characters
+  - No emojis, no hashtags, no quotation marks around the whole thing
+  - Must reference something concrete from the phrases/topic above, not a \
+generic phrase that could apply to any video
+  - Do not simply repeat the title
+
 Return ONLY valid JSON, no markdown fences, in exactly this shape:
 
 {{
   "title": "...",
   "description": "...",
-  "tags": ["tag1", "tag2", "..."]
+  "tags": ["tag1", "tag2", "..."],
+  "hook_phrase": "..."
 }}
 """
