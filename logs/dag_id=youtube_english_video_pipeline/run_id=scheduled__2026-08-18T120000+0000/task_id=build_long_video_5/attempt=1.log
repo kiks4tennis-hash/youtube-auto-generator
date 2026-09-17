@@ -1,0 +1,83 @@
+[2026-08-20T00:19:35.628+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-20T00:19:35.693+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_5 scheduled__2026-08-18T12:00:00+00:00 [queued]>
+[2026-08-20T00:19:35.709+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_5 scheduled__2026-08-18T12:00:00+00:00 [queued]>
+[2026-08-20T00:19:35.712+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-08-20T00:19:35.734+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video_5> on 2026-08-18 12:00:00+00:00
+[2026-08-20T00:19:35.743+0000] {standard_task_runner.py:64} INFO - Started process 47785 to run task
+[2026-08-20T00:19:35.748+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video_5', 'scheduled__2026-08-18T12:00:00+00:00', '--job-id', '827', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpa2ukvl31']
+[2026-08-20T00:19:35.752+0000] {standard_task_runner.py:91} INFO - Job 827: Subtask build_long_video_5
+[2026-08-20T00:19:35.869+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video_5 scheduled__2026-08-18T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-08-20T00:19:36.221+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video_5' AIRFLOW_CTX_EXECUTION_DATE='2026-08-18T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-08-18T12:00:00+00:00'
+[2026-08-20T00:19:36.223+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-20T00:19:37.813+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:37,812 | INFO     | planner.video_planner | Only 9 phrases for topic='Daily Conversation', topping up without topic filter
+[2026-08-20T00:19:37.832+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:37,832 | INFO     | planner.video_planner | Planned LONG video: topic='Mixed English Expressions', phrases=20
+[2026-08-20T00:19:38.174+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:38,174 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2104.mp3
+[2026-08-20T00:19:38.593+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:38,593 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2104.mp3
+[2026-08-20T00:19:38.830+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:38,830 | INFO     | media.image_downloader | Downloaded background image for scene='meeting' -> /opt/airflow/output/images/long_2104.jpg
+[2026-08-20T00:19:43.740+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:43,740 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2107.mp3
+[2026-08-20T00:19:44.178+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:44,178 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2107.mp3
+[2026-08-20T00:19:44.472+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:44,472 | INFO     | media.image_downloader | Downloaded background image for scene='cafe' -> /opt/airflow/output/images/long_2107.jpg
+[2026-08-20T00:19:50.313+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:50,313 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2108.mp3
+[2026-08-20T00:19:50.685+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:50,685 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2108.mp3
+[2026-08-20T00:19:50.935+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:50,934 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_2108.jpg
+[2026-08-20T00:19:55.885+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:55,884 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2112.mp3
+[2026-08-20T00:19:56.408+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:56,407 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2112.mp3
+[2026-08-20T00:19:56.648+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:56,648 | INFO     | media.image_downloader | Downloaded background image for scene='boutique' -> /opt/airflow/output/images/long_2112.jpg
+[2026-08-20T00:20:01.812+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:01,812 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2114.mp3
+[2026-08-20T00:20:02.280+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:02,280 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2114.mp3
+[2026-08-20T00:20:02.515+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:02,515 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_2114.jpg
+[2026-08-20T00:20:07.827+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:07,827 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2116.mp3
+[2026-08-20T00:20:08.158+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:08,158 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2116.mp3
+[2026-08-20T00:20:08.407+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:08,407 | INFO     | media.image_downloader | Downloaded background image for scene='cafe' -> /opt/airflow/output/images/long_2116.jpg
+[2026-08-20T00:20:13.675+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:13,675 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2117.mp3
+[2026-08-20T00:20:14.245+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:14,244 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2117.mp3
+[2026-08-20T00:20:14.769+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:14,769 | INFO     | media.image_downloader | Downloaded background image for scene='clothing' -> /opt/airflow/output/images/long_2117.jpg
+[2026-08-20T00:20:18.834+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:18,833 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2119.mp3
+[2026-08-20T00:20:19.138+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:19,138 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2119.mp3
+[2026-08-20T00:20:19.364+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:19,364 | INFO     | media.image_downloader | Downloaded background image for scene='commute' -> /opt/airflow/output/images/long_2119.jpg
+[2026-08-20T00:20:24.304+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:24,304 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2120.mp3
+[2026-08-20T00:20:24.731+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:24,731 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2120.mp3
+[2026-08-20T00:20:25.040+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:25,040 | INFO     | media.image_downloader | Downloaded background image for scene='reception' -> /opt/airflow/output/images/long_2120.jpg
+[2026-08-20T00:20:30.210+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:30,209 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2123.mp3
+[2026-08-20T00:20:30.732+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:30,732 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2123.mp3
+[2026-08-20T00:20:31.531+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:31,531 | INFO     | media.image_downloader | Downloaded background image for scene='friends' -> /opt/airflow/output/images/long_2123.jpg
+[2026-08-20T00:20:36.773+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:36,773 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2124.mp3
+[2026-08-20T00:20:37.378+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:37,378 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2124.mp3
+[2026-08-20T00:20:37.600+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:37,600 | INFO     | media.image_downloader | Downloaded background image for scene='supermarket' -> /opt/airflow/output/images/long_2124.jpg
+[2026-08-20T00:20:43.048+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:43,048 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2126.mp3
+[2026-08-20T00:20:43.462+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:43,462 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2126.mp3
+[2026-08-20T00:20:44.973+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:44,972 | INFO     | media.image_downloader | Downloaded background image for scene='elevator' -> /opt/airflow/output/images/long_2126.jpg
+[2026-08-20T00:20:50.396+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:50,396 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2129.mp3
+[2026-08-20T00:20:50.803+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:50,803 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2129.mp3
+[2026-08-20T00:20:51.854+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:51,854 | INFO     | media.image_downloader | Downloaded background image for scene='cashier' -> /opt/airflow/output/images/long_2129.jpg
+[2026-08-20T00:20:56.828+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:56,828 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2130.mp3
+[2026-08-20T00:20:57.591+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:57,591 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2130.mp3
+[2026-08-20T00:20:58.425+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:20:58,425 | INFO     | media.image_downloader | Downloaded background image for scene='home' -> /opt/airflow/output/images/long_2130.jpg
+[2026-08-20T00:21:03.554+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:03,554 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2131.mp3
+[2026-08-20T00:21:04.063+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:04,063 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2131.mp3
+[2026-08-20T00:21:04.897+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:04,897 | INFO     | media.image_downloader | Downloaded background image for scene='concierge' -> /opt/airflow/output/images/long_2131.jpg
+[2026-08-20T00:21:10.360+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:10,360 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2134.mp3
+[2026-08-20T00:21:10.750+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:10,750 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2134.mp3
+[2026-08-20T00:21:10.952+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:10,951 | INFO     | media.image_downloader | Downloaded background image for scene='lounge' -> /opt/airflow/output/images/long_2134.jpg
+[2026-08-20T00:21:15.751+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:15,751 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2136.mp3
+[2026-08-20T00:21:16.124+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:16,124 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2136.mp3
+[2026-08-20T00:21:16.320+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:16,320 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/long_2136.jpg
+[2026-08-20T00:21:20.978+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:20,978 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2137.mp3
+[2026-08-20T00:21:21.405+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:21,405 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2137.mp3
+[2026-08-20T00:21:21.643+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:21,643 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_2137.jpg
+[2026-08-20T00:21:26.633+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:26,633 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2139.mp3
+[2026-08-20T00:21:27.038+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:27,037 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2139.mp3
+[2026-08-20T00:21:27.275+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:27,275 | INFO     | media.image_downloader | Downloaded background image for scene='shopping' -> /opt/airflow/output/images/long_2139.jpg
+[2026-08-20T00:21:33.014+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:33,013 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2140.mp3
+[2026-08-20T00:21:33.325+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:33,324 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2140.mp3
+[2026-08-20T00:21:33.575+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:33,575 | INFO     | media.image_downloader | Downloaded background image for scene='cafe' -> /opt/airflow/output/images/long_2140.jpg
+[2026-08-20T00:21:44.480+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:21:44,480 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/long_bgm.mp3, rendering without background music
+[2026-08-20T00:22:22.298+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:22:22,298 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/long_2104.mp4
+[2026-08-20T00:22:29.078+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:22:29,078 | WARNING  | generators.metadata_generator | Metadata generation via Gemini failed, using fallback: RetryError[<Future at 0x7a078830c0d0 state=finished raised ResourceExhausted>]
+[2026-08-20T00:22:29.236+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:22:29,236 | INFO     | media.thumbnail_builder | Built thumbnail -> /opt/airflow/output/thumbnails/long_2104.jpg
+[2026-08-20T00:22:29.527+0000] {python.py:237} INFO - Done. Returned value was: {'video_id': 244, 'file_path': '/opt/airflow/output/videos/long_2104.mp4', 'thumbnail_path': '/opt/airflow/output/thumbnails/long_2104.jpg', 'title': '20 Daily English Expressions | Mixed English Expressions', 'description': "Learn natural English expressions with examples.\n\n- I didn't quite catch that.\n- What have you been up to lately?\n- Is Wi-Fi included in the room rate?\n- I'm just browsing, thank you.\n- I'd like to check in, please.\n- Is this seat taken?\n- Do you have this in a medium?\n- I'm running a few minutes late.\n- Could I request a late check-out?\n- Can I take a rain check?", 'tags': ['english', 'learnenglish', 'dailyenglish', 'englishphrases'], 'video_type': 'long'}
+[2026-08-20T00:22:29.529+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-20T00:22:29.559+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=build_long_video_5, run_id=scheduled__2026-08-18T12:00:00+00:00, execution_date=20260818T120000, start_date=20260820T001935, end_date=20260820T002229
+[2026-08-20T00:22:29.612+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-08-20T00:22:29.840+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-08-20T00:22:29.847+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

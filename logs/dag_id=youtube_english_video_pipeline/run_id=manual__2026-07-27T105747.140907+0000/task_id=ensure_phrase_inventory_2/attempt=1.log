@@ -1,0 +1,18 @@
+[2026-07-27T11:01:25.343+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-27T11:01:25.372+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_2 manual__2026-07-27T10:57:47.140907+00:00 [queued]>
+[2026-07-27T11:01:25.378+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_2 manual__2026-07-27T10:57:47.140907+00:00 [queued]>
+[2026-07-27T11:01:25.379+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-27T11:01:25.389+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_2> on 2026-07-27 10:57:47.140907+00:00
+[2026-07-27T11:01:25.394+0000] {standard_task_runner.py:64} INFO - Started process 64221 to run task
+[2026-07-27T11:01:25.398+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_2', 'manual__2026-07-27T10:57:47.140907+00:00', '--job-id', '419', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpam627tme']
+[2026-07-27T11:01:25.402+0000] {standard_task_runner.py:91} INFO - Job 419: Subtask ensure_phrase_inventory_2
+[2026-07-27T11:01:25.474+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_2 manual__2026-07-27T10:57:47.140907+00:00 [running]> on host cc859d74cf38
+[2026-07-27T11:01:25.655+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_2' AIRFLOW_CTX_EXECUTION_DATE='2026-07-27T10:57:47.140907+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-27T10:57:47.140907+00:00'
+[2026-07-27T11:01:25.656+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-27T11:01:26.062+0000] {logging_mixin.py:188} INFO - 2026-07-27 11:01:26,062 | INFO     | generators.phrase_generator | Unused phrase inventory: 97 (threshold=30)
+[2026-07-27T11:01:26.063+0000] {logging_mixin.py:188} INFO - 2026-07-27 11:01:26,063 | INFO     | generators.phrase_generator | Inventory sufficient. Skipping generation.
+[2026-07-27T11:01:26.075+0000] {python.py:237} INFO - Done. Returned value was: 0
+[2026-07-27T11:01:26.076+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-27T11:01:26.094+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory_2, run_id=manual__2026-07-27T10:57:47.140907+00:00, execution_date=20260727T105747, start_date=20260727T110125, end_date=20260727T110126
+[2026-07-27T11:01:26.134+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-27T11:01:26.151+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,158 @@
+[2026-09-07T11:11:09.870+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-07T11:11:09.909+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 manual__2026-09-07T11:05:33.821274+00:00 [queued]>
+[2026-09-07T11:11:09.918+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 manual__2026-09-07T11:05:33.821274+00:00 [queued]>
+[2026-09-07T11:11:09.919+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-07T11:11:09.932+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video_1> on 2026-09-07 11:05:33.821274+00:00
+[2026-09-07T11:11:09.936+0000] {standard_task_runner.py:64} INFO - Started process 34033 to run task
+[2026-09-07T11:11:09.939+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video_1', 'manual__2026-09-07T11:05:33.821274+00:00', '--job-id', '1009', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp634_cvfn']
+[2026-09-07T11:11:09.941+0000] {standard_task_runner.py:91} INFO - Job 1009: Subtask build_long_video_1
+[2026-09-07T11:11:10.010+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video_1 manual__2026-09-07T11:05:33.821274+00:00 [running]> on host cc859d74cf38
+[2026-09-07T11:11:10.247+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-07T11:05:33.821274+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-07T11:05:33.821274+00:00'
+[2026-09-07T11:11:10.248+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-07T11:11:10.895+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:10,895 | INFO     | planner.video_planner | Only 8 phrases for topic='Business English', topping up without topic filter
+[2026-09-07T11:11:10.905+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:10,905 | INFO     | planner.video_planner | Planned LONG video: topic='Mixed English Expressions', phrases=20
+[2026-09-07T11:11:11.385+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:11,385 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2604.mp3
+[2026-09-07T11:11:11.889+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:11,889 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2604.mp3
+[2026-09-07T11:11:12.676+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:12,676 | INFO     | media.image_downloader | Downloaded background image for scene='workplace' -> /opt/airflow/output/images/long_2604.jpg
+[2026-09-07T11:11:16.627+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:16,626 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2607.mp3
+[2026-09-07T11:11:17.283+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:17,282 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2607.mp3
+[2026-09-07T11:11:18.171+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:18,171 | INFO     | media.image_downloader | Downloaded background image for scene='dealership' -> /opt/airflow/output/images/long_2607.jpg
+[2026-09-07T11:11:22.987+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:22,987 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2608.mp3
+[2026-09-07T11:11:23.390+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:23,390 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2608.mp3
+[2026-09-07T11:11:23.844+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:23,844 | INFO     | media.image_downloader | Downloaded background image for scene='lobby' -> /opt/airflow/output/images/long_2608.jpg
+[2026-09-07T11:11:29.090+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:29,090 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2605.mp3
+[2026-09-07T11:11:29.576+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:29,576 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2605.mp3
+[2026-09-07T11:11:30.435+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:30,435 | INFO     | media.image_downloader | Downloaded background image for scene='park' -> /opt/airflow/output/images/long_2605.jpg
+[2026-09-07T11:11:36.383+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:36,382 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2603.mp3
+[2026-09-07T11:11:36.768+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:36,768 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2603.mp3
+[2026-09-07T11:11:37.751+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:37,750 | INFO     | media.image_downloader | Downloaded background image for scene='reception' -> /opt/airflow/output/images/long_2603.jpg
+[2026-09-07T11:11:42.416+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:42,416 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2606.mp3
+[2026-09-07T11:11:43.057+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:43,057 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2606.mp3
+[2026-09-07T11:11:43.955+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:43,955 | INFO     | media.image_downloader | Downloaded background image for scene='bistro' -> /opt/airflow/output/images/long_2606.jpg
+[2026-09-07T11:11:48.887+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:48,887 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2610.mp3
+[2026-09-07T11:11:49.361+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:49,361 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2610.mp3
+[2026-09-07T11:11:50.029+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:50,029 | INFO     | media.image_downloader | Downloaded background image for scene='arrival' -> /opt/airflow/output/images/long_2610.jpg
+[2026-09-07T11:11:54.487+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:54,487 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2609.mp3
+[2026-09-07T11:11:54.957+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:54,957 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2609.mp3
+[2026-09-07T11:11:55.761+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:11:55,761 | INFO     | media.image_downloader | Downloaded background image for scene='apartment' -> /opt/airflow/output/images/long_2609.jpg
+[2026-09-07T11:12:02.211+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:02,211 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2638.mp3
+[2026-09-07T11:12:02.837+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:02,837 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2638.mp3
+[2026-09-07T11:12:03.639+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:03,638 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/long_2638.jpg
+[2026-09-07T11:12:10.057+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:10,057 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2643.mp3
+[2026-09-07T11:12:10.694+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:10,694 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2643.mp3
+[2026-09-07T11:12:11.938+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:11,938 | INFO     | media.image_downloader | Downloaded background image for scene='meeting' -> /opt/airflow/output/images/long_2643.jpg
+[2026-09-07T11:12:17.786+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:17,786 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2637.mp3
+[2026-09-07T11:12:18.210+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:18,210 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2637.mp3
+[2026-09-07T11:12:19.090+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:19,090 | INFO     | media.image_downloader | Downloaded background image for scene='boutique' -> /opt/airflow/output/images/long_2637.jpg
+[2026-09-07T11:12:24.564+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:24,564 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2644.mp3
+[2026-09-07T11:12:25.037+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:25,037 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2644.mp3
+[2026-09-07T11:12:26.291+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:26,291 | INFO     | media.image_downloader | Downloaded background image for scene='street' -> /opt/airflow/output/images/long_2644.jpg
+[2026-09-07T11:12:32.660+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:32,660 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2634.mp3
+[2026-09-07T11:12:33.206+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:33,206 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2634.mp3
+[2026-09-07T11:12:34.399+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:34,399 | INFO     | media.image_downloader | Downloaded background image for scene='bakery' -> /opt/airflow/output/images/long_2634.jpg
+[2026-09-07T11:12:41.609+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:41,609 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2642.mp3
+[2026-09-07T11:12:42.008+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:42,008 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2642.mp3
+[2026-09-07T11:12:42.933+0000] {logging_mixin.py:188} INFO - 2026-09-07 11:12:42,933 | INFO     | media.image_downloader | Downloaded background image for scene='commute' -> /opt/airflow/output/images/long_2642.jpg
+[2026-09-07T11:12:59.538+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-07T11:12:59.541+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1025, in _wrap_create_connection
+    return await self._loop.create_connection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 1070, in create_connection
+    sock = await self._connect_sock(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 974, in _connect_sock
+    await self.sock_connect(sock, address)
+  File "/usr/local/lib/python3.11/asyncio/selector_events.py", line 638, in sock_connect
+    return await fut
+           ^^^^^^^^^
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 581, in _request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 544, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 944, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1226, in _create_direct_connection
+    transp, proto = await self._wrap_create_connection(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/connector.py", line 1022, in _wrap_create_connection
+    async with ceil_timeout(
+  File "/usr/local/lib/python3.11/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 98, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 121, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 56, in run
+    audio = self.tts.generate_for_phrase(phrase.id, phrase.phrase, phrase.example)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 50, in generate_for_phrase
+    "phrase_audio": self.generate_phrase_audio(phrase_id, phrase),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 42, in generate_phrase_audio
+    return synthesize_sync(text, self.phrase_voice, out_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 28, in synthesize_sync
+    asyncio.run(_synthesize(text, voice, out_path))
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/tts/edge_tts.py", line 23, in _synthesize
+    await communicate.save(str(out_path))
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 613, in save
+    async for message in self.stream():
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 588, in stream
+    async for message in self.__stream():
+  File "/home/airflow/.local/lib/python3.11/site-packages/edge_tts/communicate.py", line 461, in __stream
+    async with aiohttp.ClientSession(
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 1197, in __aenter__
+    self._resp = await self._coro
+                 ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 835, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/aiohttp/client.py", line 585, in _request
+    raise ServerTimeoutError(
+aiohttp.client_exceptions.ServerTimeoutError: Connection timeout to host wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=0bf487a799ed4a63be3f878fe3b05100&Sec-MS-GEC=52A8C53225A9D7692031358FABDAE565A751423D29C4C604714FEA05E8669249&Sec-MS-GEC-Version=1-143.0.3650.75
+[2026-09-07T11:12:59.774+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video_1, run_id=manual__2026-09-07T11:05:33.821274+00:00, execution_date=20260907T110533, start_date=20260907T111109, end_date=20260907T111259
+[2026-09-07T11:12:59.800+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1009 for task build_long_video_1 (Connection timeout to host wss://speech.platform.bing.com/consumer/speech/synthesize/readaloud/edge/v1?TrustedClientToken=6A5AA1D4EAFF4E9FB37E23D68491D6F4&ConnectionId=0bf487a799ed4a63be3f878fe3b05100&Sec-MS-GEC=52A8C53225A9D7692031358FABDAE565A751423D29C4C604714FEA05E8669249&Sec-MS-GEC-Version=1-143.0.3650.75; 34033)
+[2026-09-07T11:12:59.836+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-09-07T11:13:00.087+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-07T11:13:00.092+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

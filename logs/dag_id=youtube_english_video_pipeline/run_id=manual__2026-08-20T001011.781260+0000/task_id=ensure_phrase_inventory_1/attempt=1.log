@@ -1,0 +1,151 @@
+[2026-08-20T00:34:06.393+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-20T00:34:06.479+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 manual__2026-08-20T00:10:11.781260+00:00 [queued]>
+[2026-08-20T00:34:06.499+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 manual__2026-08-20T00:10:11.781260+00:00 [queued]>
+[2026-08-20T00:34:06.512+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-08-20T00:34:06.544+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_1> on 2026-08-20 00:10:11.781260+00:00
+[2026-08-20T00:34:06.562+0000] {standard_task_runner.py:64} INFO - Started process 51354 to run task
+[2026-08-20T00:34:06.568+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_1', 'manual__2026-08-20T00:10:11.781260+00:00', '--job-id', '835', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp7y35wzci']
+[2026-08-20T00:34:06.578+0000] {standard_task_runner.py:91} INFO - Job 835: Subtask ensure_phrase_inventory_1
+[2026-08-20T00:34:06.741+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 manual__2026-08-20T00:10:11.781260+00:00 [running]> on host cc859d74cf38
+[2026-08-20T00:34:07.099+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_1' AIRFLOW_CTX_EXECUTION_DATE='2026-08-20T00:10:11.781260+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-08-20T00:10:11.781260+00:00'
+[2026-08-20T00:34:07.105+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-20T00:34:08.894+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:34:08,894 | INFO     | generators.phrase_generator | Unused phrase inventory: 8 (threshold=30)
+[2026-08-20T00:34:08.896+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:34:08,896 | INFO     | generators.phrase_generator | Inventory low (8). Generating new phrases...
+[2026-08-20T00:34:08.898+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:34:08,898 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-08-20T23:40:36.436+0000] {logging_mixin.py:188} INFO - 2026-08-20 23:40:36,423 | ERROR    | generators.phrase_generator | Skipping a batch of 25 phrases after retries exhausted: RetryError[<Future at 0x7a078862f490 state=finished raised RetryError>]
+[2026-08-20T23:40:36.462+0000] {logging_mixin.py:188} INFO - 2026-08-20 23:40:36,462 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-08-21T00:20:30.729+0000] {logging_mixin.py:188} INFO - 2026-08-21 00:20:30,722 | ERROR    | generators.phrase_generator | Skipping a batch of 25 phrases after retries exhausted: RetryError[<Future at 0x7a078849a4d0 state=finished raised RetryError>]
+[2026-08-21T00:20:30.739+0000] {logging_mixin.py:188} INFO - 2026-08-21 00:20:30,739 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-08-21T01:00:22.017+0000] {logging_mixin.py:188} INFO - 2026-08-21 01:00:22,017 | ERROR    | generators.phrase_generator | Skipping a batch of 25 phrases after retries exhausted: RetryError[<Future at 0x7a0788599a90 state=finished raised RetryError>]
+[2026-08-21T01:00:22.020+0000] {logging_mixin.py:188} INFO - 2026-08-21 01:00:22,020 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-08-21T13:32:11.174+0000] {local_task_job_runner.py:214} ERROR - Heartbeat time limit exceeded!
+[2026-08-21T13:32:11.934+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-08-21T13:32:12.290+0000] {process_utils.py:132} INFO - Sending 15 to group 51354. PIDs of all processes in the group: [51354]
+[2026-08-21T19:32:07.684+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 51354
+[2026-08-21T19:32:07.785+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-08-21T19:32:07.827+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-21T19:32:07.944+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/grpc_helpers.py", line 76, in error_remapped_callable
+    return callable_(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/grpc/_channel.py", line 1181, in __call__
+    return _end_unary_response_blocking(state, call, False, None)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/grpc/_channel.py", line 1006, in _end_unary_response_blocking
+    raise _InactiveRpcError(state)  # pytype: disable=not-instantiable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+grpc._channel._InactiveRpcError: <_InactiveRpcError of RPC that terminated with:
+	status = StatusCode.UNAVAILABLE
+	details = "failed to connect to all addresses; last error: UNKNOWN: ipv4:172.217.115.4:443: Failed to connect to remote host: FD Shutdown"
+	debug_error_string = "UNKNOWN:Error received from peer  {created_time:"2026-08-21T13:32:12.097368938+00:00", grpc_status:14, grpc_message:"failed to connect to all addresses; last error: UNKNOWN: ipv4:172.217.115.4:443: Failed to connect to remote host: FD Shutdown"}"
+>
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 144, in retry_target
+    result = target()
+             ^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/timeout.py", line 120, in func_with_timeout
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/grpc_helpers.py", line 78, in error_remapped_callable
+    raise exceptions.from_grpc_error(exc) from exc
+google.api_core.exceptions.ServiceUnavailable: 503 failed to connect to all addresses; last error: UNKNOWN: ipv4:172.217.115.4:443: Failed to connect to remote host: FD Shutdown
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 58, in task_ensure_phrase_inventory
+    inserted = ensure_phrase_inventory()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 146, in ensure_phrase_inventory
+    inserted = generator.generate_and_store(batch)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 104, in generate_and_store
+    phrases = self.generate_phrases(count)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 76, in generate_phrases
+    collected.extend(self._generate_batch(n))
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 475, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 398, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 478, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 62, in _generate_batch
+    raw_text = self._call_gemini(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 475, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 398, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 478, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 40, in _call_gemini
+    response = self.model.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/generativeai/generative_models.py", line 331, in generate_content
+    response = self._client.generate_content(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/ai/generativelanguage_v1beta/services/generative_service/client.py", line 827, in generate_content
+    response = rpc(
+               ^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/gapic_v1/method.py", line 131, in __call__
+    return wrapped_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 293, in retry_wrapped_func
+    return retry_target(
+           ^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/google/api_core/retry/retry_unary.py", line 164, in retry_target
+    time.sleep(sleep)
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-08-22T00:28:37.751+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory_1, run_id=manual__2026-08-20T00:10:11.781260+00:00, execution_date=20260820T001011, start_date=20260820T003406, end_date=20260822T002837
+[2026-08-22T00:28:38.137+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=51354, status='terminated', exitcode=2, started='2026-08-20 00:34:05') (51354) terminated with exit code 2
