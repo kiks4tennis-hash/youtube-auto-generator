@@ -1,0 +1,50 @@
+[2026-09-10T13:03:48.694+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-10T13:03:48.721+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-09T12:00:00+00:00 [queued]>
+[2026-09-10T13:03:48.726+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-09T12:00:00+00:00 [queued]>
+[2026-09-10T13:03:48.731+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2026-09-10T13:03:48.745+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video_1> on 2026-09-09 12:00:00+00:00
+[2026-09-10T13:03:48.755+0000] {standard_task_runner.py:64} INFO - Started process 11850 to run task
+[2026-09-10T13:03:48.758+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video_1', 'scheduled__2026-09-09T12:00:00+00:00', '--job-id', '1111', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpvu4admpz']
+[2026-09-10T13:03:48.762+0000] {standard_task_runner.py:91} INFO - Job 1111: Subtask build_long_video_1
+[2026-09-10T13:03:48.824+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-09T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-09-10T13:03:48.973+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-09T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-09T12:00:00+00:00'
+[2026-09-10T13:03:48.974+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-10T13:03:49.247+0000] {logging_mixin.py:188} INFO - 2026-09-10 13:03:49,247 | INFO     | planner.video_planner | Only 3 phrases for topic='Travel English', topping up without topic filter
+[2026-09-10T13:03:49.251+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-10T13:03:49.252+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 98, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 125, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 46, in run
+    plan = self.planner.plan("long")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/planner/video_planner.py", line 67, in plan
+    return self.plan_long()
+           ^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/planner/video_planner.py", line 55, in plan_long
+    raise RuntimeError(
+RuntimeError: Not enough unused phrases for a Long video (have 12, need at least 15)
+[2026-09-10T13:03:49.264+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=youtube_english_video_pipeline, task_id=build_long_video_1, run_id=scheduled__2026-09-09T12:00:00+00:00, execution_date=20260909T120000, start_date=20260910T130348, end_date=20260910T130349
+[2026-09-10T13:03:49.272+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1111 for task build_long_video_1 (Not enough unused phrases for a Long video (have 12, need at least 15); 11850)
+[2026-09-10T13:03:49.292+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-09-10T13:03:49.401+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-10T13:03:49.406+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -1,0 +1,11 @@
+[2026-09-17T11:54:15.569+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-17T11:54:15.603+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-15T12:00:00+00:00 [queued]>
+[2026-09-17T11:54:15.609+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-15T12:00:00+00:00 [queued]>
+[2026-09-17T11:54:15.610+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-17T11:54:15.624+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_1> on 2026-09-15 12:00:00+00:00
+[2026-09-17T11:54:15.628+0000] {standard_task_runner.py:64} INFO - Started process 442 to run task
+[2026-09-17T11:54:15.632+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_1', 'scheduled__2026-09-15T12:00:00+00:00', '--job-id', '1195', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp7gx_azll']
+[2026-09-17T11:54:15.635+0000] {standard_task_runner.py:91} INFO - Job 1195: Subtask ensure_phrase_inventory_1
+[2026-09-17T11:54:15.693+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-15T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-09-17T11:54:15.947+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-15T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-15T12:00:00+00:00'
+[2026-09-17T11:54:15.948+0000] {taskinstance.py:430} INFO - ::endgroup::
