@@ -12,7 +12,7 @@ from typing import Optional
 import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential
 
-from config.prompts import PHRASE_GENERATION_PROMPT
+from config.prompts import PHRASE_GENERATION_PROMPT, PHRASE_GENERATION_PROMPT_FOR_TOPIC
 from config.settings import settings
 from database.repository import Repository
 from utils.logger import get_logger
@@ -55,25 +55,38 @@ class PhraseGenerator:
         return response.text
 
     @retry(stop=stop_after_attempt(2), wait=wait_exponential(multiplier=2, min=2, max=20))
-    def _generate_batch(self, n: int) -> list[dict]:
+    def _generate_batch(self, n: int, topic: Optional[str] = None) -> list[dict]:
         """Gemini呼び出し+パースをまとめて1単位とし、JSON破損時もこの単位でリトライする
         （_call_gemini自体も内部で2回試行するため、最悪1バッチあたり最大4回試行される）"""
-        prompt = PHRASE_GENERATION_PROMPT.format(count=n)
+        if topic:
+            prompt = PHRASE_GENERATION_PROMPT_FOR_TOPIC.format(count=n, topic=topic)
+        else:
+            prompt = PHRASE_GENERATION_PROMPT.format(count=n)
         raw_text = self._call_gemini(prompt)
-        return self._parse_response(raw_text)
+        phrases = self._parse_response(raw_text)
+        if topic:
+            # Geminiがtopicの表記を微妙に揺らして返すことがあるため、
+            # 呼び出し元が指定した文字列に強制的に揃える
+            # （揺れがあると fetch_unused_phrases(topic=...) で拾えなくなる）
+            for p in phrases:
+                p["topic"] = topic
+        return phrases
 
-    def generate_phrases(self, count: int) -> list[dict]:
+    def generate_phrases(self, count: int, topic: Optional[str] = None) -> list[dict]:
         """count件のフレーズを生成する。1回のJSON出力が長すぎて打ち切られないよう、
-        25件ずつ分割して呼び出す（max_output_tokens=8192との組み合わせで安全マージンを確保）"""
+        25件ずつ分割して呼び出す（max_output_tokens=8192との組み合わせで安全マージンを確保）。
+        topicを指定すると、そのトピックのフレーズのみを狙い撃ちで生成する
+        （Long動画を単一トピックで揃えるための追加補充に使用）。"""
         batch_size = 25
         collected: list[dict] = []
 
         remaining = count
         while remaining > 0:
             n = min(batch_size, remaining)
-            logger.info(f"Requesting {n} phrases from Gemini...")
+            topic_note = f" for topic='{topic}'" if topic else ""
+            logger.info(f"Requesting {n} phrases from Gemini{topic_note}...")
             try:
-                collected.extend(self._generate_batch(n))
+                collected.extend(self._generate_batch(n, topic=topic))
             except Exception as e:
                 # リトライを尽くしてもなお失敗した場合のみ、そのバッチを諦めて次へ進む
                 logger.error(f"Skipping a batch of {n} phrases after retries exhausted: {e}")
@@ -99,11 +112,13 @@ class PhraseGenerator:
         logger.info(f"Parsed {len(valid)} valid phrases out of {len(phrases)} returned")
         return valid
 
-    def generate_and_store(self, count: int) -> int:
-        """フレーズを生成しDBへ保存する。挿入件数を返す。"""
-        phrases = self.generate_phrases(count)
+    def generate_and_store(self, count: int, topic: Optional[str] = None) -> int:
+        """フレーズを生成しDBへ保存する。挿入件数を返す。
+        topic指定時はそのトピックのみを補充する（Long動画の単一トピック化のため）。"""
+        phrases = self.generate_phrases(count, topic=topic)
         inserted = self.repository.insert_phrases(phrases)
-        logger.info(f"Inserted {inserted} new phrases into the database")
+        topic_note = f" for topic='{topic}'" if topic else ""
+        logger.info(f"Inserted {inserted} new phrases{topic_note} into the database")
         return inserted
 
 

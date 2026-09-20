@@ -26,6 +26,7 @@ from pathlib import Path
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator, ShortCircuitOperator
+from airflow.utils.trigger_rule import TriggerRule
 
 # コンテナ内で src/ 配下と config/ 配下のモジュールをimportできるようにする。
 # - "generators.xxx" 等は src/ を、"config.xxx" はプロジェクトルート(config/の親)を
@@ -53,9 +54,19 @@ default_args = {
 # ---------------------------------------------------------------
 
 def task_ensure_phrase_inventory(**context):
+    from config.settings import settings
     from generators.phrase_generator import ensure_phrase_inventory
 
-    inserted = ensure_phrase_inventory()
+    # このタスクの直後に Short 1本、さらに（曜日条件 or FORCE_BUILD_LONG_VIDEO 次第で）
+    # Long 1本を同じセット内でビルドする可能性がある。Long動画は
+    # min_phrases_per_video 件のフレーズを必要とするため、ここで「Short分＋Long分」を
+    # まとめて確保できているか検証しないと、Gemini生成が失敗していても素通りしてしまい、
+    # 何本も後段のbuild_long_video側で初めて（分かりにくい形で）失敗する。
+    short_need = settings.profile("short")["phrases_per_video"]
+    long_need = settings.profile("long")["min_phrases_per_video"]
+    required_count = short_need + long_need
+
+    inserted = ensure_phrase_inventory(required_count=required_count)
     context["ti"].xcom_push(key="phrases_generated", value=inserted)
     return inserted
 
@@ -131,9 +142,12 @@ with DAG(
 
     for i in range(1, VIDEO_REPEAT_COUNT + 1): # ここでループ回数の変更可能
 
+        # 前セットのLong動画タスクがスキップされていても後続セットが止まらないよう、
+        # NONE_FAILED（＝上流が失敗さえしていなければ、スキップでもOK）にしておく。
         ensure_task = PythonOperator(
             task_id=f"ensure_phrase_inventory_{i}",
             python_callable=task_ensure_phrase_inventory,
+            trigger_rule=TriggerRule.NONE_FAILED,
         )
 
         short_build_task = PythonOperator(
@@ -147,6 +161,15 @@ with DAG(
             op_kwargs={
                 "build_task_id": f"build_short_video_{i}",
             },
+        )
+
+        # 曜日条件（火・金のみ、またはFORCE_BUILD_LONG_VIDEO=true）でLong動画をゲートする。
+        # ignore_downstream_trigger_rules=False にしておかないと、直下のタスクだけでなく
+        # 「次セットのensure_task」までまとめてスキップされてしまうので注意。
+        should_build_long_task = ShortCircuitOperator(
+            task_id=f"should_build_long_video_{i}",
+            python_callable=task_should_build_long_video,
+            ignore_downstream_trigger_rules=False,
         )
 
         long_build_task = PythonOperator(
@@ -164,7 +187,8 @@ with DAG(
 
         ensure_task >> short_build_task
         short_build_task >> short_upload_task
-        short_upload_task >> long_build_task
+        short_upload_task >> should_build_long_task
+        should_build_long_task >> long_build_task
         long_build_task >> long_upload_task
 
         video_sets.append(
@@ -172,6 +196,7 @@ with DAG(
                 ensure_task,
                 short_build_task,
                 short_upload_task,
+                should_build_long_task,
                 long_build_task,
                 long_upload_task,
             )

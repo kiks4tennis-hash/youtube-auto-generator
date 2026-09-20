@@ -8,6 +8,7 @@ from dataclasses import dataclass
 
 from config.settings import settings
 from database.repository import Phrase, Repository
+from generators.phrase_generator import PhraseGenerator
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -35,26 +36,37 @@ class VideoPlanner:
         return VideoPlan(video_type="short", topic=topic, phrases=phrases)
 
     def plan_long(self) -> VideoPlan:
+        """Long動画を「1トピックのみ」で組み立てる（トピックを混ぜたMixed動画は作らない）。
+        最有力トピックの在庫が足りない場合は、そのトピックのフレーズをGeminiで
+        追加生成してから組み立てる。それでも足りなければエラーで止める。"""
         profile = settings.profile("long")
         target_n = profile["phrases_per_video"]
         min_n = profile["min_phrases_per_video"]
 
-        topic = self.repository.fetch_most_common_topic()
+        topic_counts = self.repository.fetch_topic_phrase_counts()
+        if not topic_counts:
+            raise RuntimeError(
+                "No topics with unused phrases available for a Long video. "
+                "Run phrase generation first."
+            )
+
+        topic, count = topic_counts[0]
+
+        if count < min_n:
+            shortfall = target_n - count
+            logger.info(
+                f"Top topic '{topic}' only has {count} unused phrases (need {min_n}). "
+                f"Generating {shortfall} more phrases for this topic instead of mixing topics..."
+            )
+            generator = PhraseGenerator(repository=self.repository)
+            generator.generate_and_store(shortfall, topic=topic)
+
         phrases = self.repository.fetch_unused_phrases(limit=target_n, topic=topic)
 
         if len(phrases) < min_n:
-            # 特定トピックだけでは足りない場合はトピック問わず補充する
-            logger.info(
-                f"Only {len(phrases)} phrases for topic='{topic}', "
-                f"topping up without topic filter"
-            )
-            phrases = self.repository.fetch_unused_phrases(limit=target_n)
-            topic = "Mixed English Expressions"
-
-        if len(phrases) < min_n:
             raise RuntimeError(
-                f"Not enough unused phrases for a Long video "
-                f"(have {len(phrases)}, need at least {min_n})"
+                f"Not enough unused phrases for a single-topic Long video, even after "
+                f"generation (topic='{topic}', have {len(phrases)}, need at least {min_n})"
             )
 
         logger.info(f"Planned LONG video: topic='{topic}', phrases={len(phrases)}")
