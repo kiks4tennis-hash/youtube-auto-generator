@@ -35,8 +35,8 @@ class VideoMetadata:
 
 # トピックが無かった場合のフォールバック用テンプレート（Gemini API呼び出し失敗時に使用）
 _FALLBACK_TITLES = {
-    "short": "Daily English Phrase | {topic}",
-    "long": "{count} Daily English Expressions | {topic}",
+    "short": "{topic}: Daily English Phrase",
+    "long": "{topic}: {count} Phrases You'll Actually Use",
 }
 
 # hook_phrase 生成に失敗した場合の最終フォールバック（英語の短いキャッチコピー）。

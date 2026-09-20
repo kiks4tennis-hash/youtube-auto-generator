@@ -29,6 +29,32 @@ in exactly this shape:
 }}
 """
 
+PHRASE_GENERATION_PROMPT_FOR_TOPIC = """\
+You are an assistant that creates content for an English-learning YouTube channel.
+
+Generate {count} natural, commonly-used daily English phrases that intermediate \
+learners would find genuinely useful, ALL specifically for this one topic: \
+"{topic}". Every phrase must clearly belong to this topic - do not drift into \
+unrelated situations. Avoid duplicates and avoid overly academic or rare \
+expressions.
+
+For each phrase provide:
+- "phrase": the short expression itself
+- "example": one natural example sentence using the phrase in context
+- "scene": a single English keyword describing the situation, suitable as an \
+image search keyword, consistent with the topic "{topic}"
+- "topic": always exactly "{topic}" (copy it verbatim for every phrase)
+
+Return ONLY valid JSON, with no markdown code fences and no extra commentary, \
+in exactly this shape:
+
+{{
+  "phrases": [
+    {{"phrase": "...", "example": "...", "scene": "...", "topic": "{topic}"}}
+  ]
+}}
+"""
+
 METADATA_GENERATION_PROMPT = """\
 You are a YouTube SEO copywriter and thumbnail strategist for an \
 English-learning channel called "Taky's Language School", which teaches \
@@ -42,6 +68,14 @@ Phrases covered in this video:
 Write metadata that will help this video reach English learners searching for \
 practical spoken-English content. Keep the title under 90 characters and the \
 description under 800 characters (title and description stay in English).
+
+This video covers exactly ONE topic ("{topic}") - it is not a mixed-topic \
+video. The title MUST make that topic unmistakable at a glance: lead with the \
+topic itself (e.g. start with "{topic}" or a natural equivalent of it) rather \
+than burying it after a generic phrase count. "20 Daily English Expressions" \
+is too generic on its own; "{topic}: 20 Phrases You'll Actually Use" or \
+"{topic} - 20 Natural Ways to..." are the right shape. The description's \
+first sentence should also make the topic explicit.
 
 Also write two thumbnail-only fields:
 

@@ -128,6 +128,22 @@ class Repository:
                 row = cur.fetchone()
                 return row[0] if row else None
 
+    def fetch_topic_phrase_counts(self) -> list[tuple[str, int]]:
+        """未使用フレーズをトピックごとに集計し、件数の多い順に返す。
+        Long動画を「1トピックのみ」で組み立てるための候補選定に使う。"""
+        with self._conn() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """
+                    SELECT topic, COUNT(*) AS cnt
+                    FROM phrases
+                    WHERE uploaded = FALSE AND topic IS NOT NULL
+                    GROUP BY topic
+                    ORDER BY cnt DESC
+                    """
+                )
+                return [(row[0], row[1]) for row in cur.fetchall()]
+
     def mark_phrases_used(self, phrase_ids: list[int]) -> None:
         if not phrase_ids:
             return
