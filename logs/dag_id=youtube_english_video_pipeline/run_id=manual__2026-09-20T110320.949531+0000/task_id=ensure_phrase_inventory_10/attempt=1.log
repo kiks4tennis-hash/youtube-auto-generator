@@ -1,0 +1,34 @@
+[2026-09-20T11:27:48.023+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-20T11:27:48.078+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_10 manual__2026-09-20T11:03:20.949531+00:00 [queued]>
+[2026-09-20T11:27:48.092+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_10 manual__2026-09-20T11:03:20.949531+00:00 [queued]>
+[2026-09-20T11:27:48.094+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-20T11:27:48.113+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_10> on 2026-09-20 11:03:20.949531+00:00
+[2026-09-20T11:27:48.121+0000] {standard_task_runner.py:64} INFO - Started process 61801 to run task
+[2026-09-20T11:27:48.126+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_10', 'manual__2026-09-20T11:03:20.949531+00:00', '--job-id', '1357', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp6rwcfc1z']
+[2026-09-20T11:27:48.129+0000] {standard_task_runner.py:91} INFO - Job 1357: Subtask ensure_phrase_inventory_10
+[2026-09-20T11:27:48.199+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_10 manual__2026-09-20T11:03:20.949531+00:00 [running]> on host 73b18333cdfe
+[2026-09-20T11:27:48.533+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_10' AIRFLOW_CTX_EXECUTION_DATE='2026-09-20T11:03:20.949531+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-20T11:03:20.949531+00:00'
+[2026-09-20T11:27:48.534+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-20T11:27:49.014+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:27:49,014 | INFO     | generators.phrase_generator | Unused phrase inventory: 29 (threshold=30)
+[2026-09-20T11:27:49.016+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:27:49,016 | INFO     | generators.phrase_generator | Inventory low (29). Generating new phrases...
+[2026-09-20T11:27:49.017+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:27:49,017 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:27:54.732+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:27:54,732 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:27:54.734+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:27:54,734 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:28:01.186+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:01,186 | ERROR    | generators.phrase_generator | Failed to parse Gemini response as JSON: Extra data: line 30 column 1 (char 4047)
+Raw: {
+  "phrases": [
+    {"phrase": "Could you please tell me...?", "example": "Could you please tell me where the nearest subway station is?", "scene": "street", "topic": "Travel English"},
+    {"phrase": "I'm just looking, thanks.", "example": "No thank you, I'm just looking, thanks.", "scene": "shopping", "topic": "Shopping English"},
+    {"phrase": "Do you have this in a different size?", "example": "I really like this shirt, but do you have this in a different size?", "scene": "clothing", "topi
+[2026-09-20T11:28:08.583+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:08,583 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:28:08.585+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:08,585 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:28:14.934+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:14,934 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:28:14.936+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:14,936 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:28:20.566+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:20,566 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:28:20.595+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:28:20,595 | INFO     | generators.phrase_generator | Inserted 100 new phrases into the database
+[2026-09-20T11:28:20.618+0000] {python.py:237} INFO - Done. Returned value was: 100
+[2026-09-20T11:28:20.620+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-20T11:28:20.654+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory_10, run_id=manual__2026-09-20T11:03:20.949531+00:00, execution_date=20260920T110320, start_date=20260920T112748, end_date=20260920T112820
+[2026-09-20T11:28:20.726+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-09-20T11:28:21.002+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-09-20T11:28:21.010+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

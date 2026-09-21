@@ -81,11 +81,24 @@ class LongVideoPipeline:
 
         metadata = self.metadata_gen.generate("long", plan.topic, phrases)
 
+        # サムネイルの「フックバナー」は Gemini が動画の中身から生成した hook_phrase を使う
+        # （間違い・恥ずかしい失敗などタイトル側と同じ訴求軸）。生成に失敗した場合は
+        # metadata_generator 側で既にフォールバック済み。
+        #
+        # 右側の表情は、Pexels写真の検索成否やAIイラスト生成(Pollinations)の成否に
+        # 依存せず常に同じ位置・品質で表示できるよう、ThumbnailBuilder側で
+        # Pillowの図形描画のみによるアイコンとして描く（無料・追加依存なし・確実）。
+        # IllustrationGenerator や Pexels人物切り抜き(download_person_for_topic /
+        # cutout_person_photo)は現在このフローからは呼んでいないが、関連コードは
+        # 将来また使う可能性に備えて残してある。
         thumbnail_path = self.thumbnails.build(
             video_id=provisional_id,
             main_title=f"{len(phrases)} Daily English Expressions",
             sub_title=plan.topic,
             background_image=first_image,
+            hook_phrase=metadata.hook_phrase,
+            ng_phrase=metadata.ng_phrase,
+            ok_phrase=metadata.ok_phrase,
         )
 
         video_record = VideoRecord(
