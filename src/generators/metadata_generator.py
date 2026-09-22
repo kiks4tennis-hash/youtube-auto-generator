@@ -48,7 +48,7 @@ _FALLBACK_HOOK_PHRASES = [
     "AVOID THIS MISTAKE",
 ]
 
-_MAX_HOOK_CHARS = 32        # 英語の短いキャッチコピー用
+_MAX_HOOK_CHARS = 42        # 英語のキャッチコピー用（主見出しなので少し余裕を持たせる）
 _MAX_NG_OK_CHARS = 40       # NG/OK各フレーズの安全上限（英単語ベース）
 
 

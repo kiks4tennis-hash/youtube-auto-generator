@@ -82,7 +82,7 @@ Also write two thumbnail-only fields:
 1. "hook_phrase": a SHORT, high-impact catch-copy WRITTEN IN ENGLISH for the \
 thumbnail's headline banner (not the title, not the description). This is the \
 single most important piece of text on the thumbnail, so it must be SHORT \
-(roughly 3-6 words, under 30 characters) and create curiosity or a sense of \
+(roughly 3-7 words, under 40 characters) and create curiosity or a sense of \
 urgency - like a magazine cover line, not a caption or full sentence. Base it \
 on the specific phrases above and lean into anxieties learners actually have: \
 not being understood, sounding unnatural/textbook-ish, embarrassing mistakes, \
@@ -105,7 +105,7 @@ real English - just awkward/non-native. Never gibberish, never offensive.
 return {{"ng": "", "ok": ""}} instead of forcing a weak or misleading example.
 
 Rules for hook_phrase:
-  - English only, roughly 3-6 words, under 30 characters
+  - English only, roughly 3-7 words, under 40 characters
   - No emojis, no hashtags, no quotation marks around the whole thing
   - Must reference something concrete from the phrases/topic above, not a \
 generic line that could apply to any video

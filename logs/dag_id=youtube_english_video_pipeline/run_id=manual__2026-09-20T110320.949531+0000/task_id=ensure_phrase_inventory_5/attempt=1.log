@@ -1,0 +1,28 @@
+[2026-09-20T11:14:13.862+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-20T11:14:13.896+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_5 manual__2026-09-20T11:03:20.949531+00:00 [queued]>
+[2026-09-20T11:14:13.905+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_5 manual__2026-09-20T11:03:20.949531+00:00 [queued]>
+[2026-09-20T11:14:13.907+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-20T11:14:13.925+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_5> on 2026-09-20 11:03:20.949531+00:00
+[2026-09-20T11:14:13.933+0000] {standard_task_runner.py:64} INFO - Started process 46541 to run task
+[2026-09-20T11:14:13.937+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_5', 'manual__2026-09-20T11:03:20.949531+00:00', '--job-id', '1331', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpbo3raso8']
+[2026-09-20T11:14:13.943+0000] {standard_task_runner.py:91} INFO - Job 1331: Subtask ensure_phrase_inventory_5
+[2026-09-20T11:14:14.044+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_5 manual__2026-09-20T11:03:20.949531+00:00 [running]> on host 73b18333cdfe
+[2026-09-20T11:14:14.303+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_5' AIRFLOW_CTX_EXECUTION_DATE='2026-09-20T11:03:20.949531+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-20T11:03:20.949531+00:00'
+[2026-09-20T11:14:14.304+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-20T11:14:14.616+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:14,616 | INFO     | generators.phrase_generator | Unused phrase inventory: 22 (threshold=30)
+[2026-09-20T11:14:14.617+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:14,617 | INFO     | generators.phrase_generator | Inventory low (22). Generating new phrases...
+[2026-09-20T11:14:14.618+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:14,618 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:14:21.086+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:21,086 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:14:21.087+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:21,087 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:14:26.922+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:26,922 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:14:26.923+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:26,923 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:14:34.194+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:34,194 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:14:34.199+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:34,199 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-20T11:14:40.644+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:40,644 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-20T11:14:40.670+0000] {logging_mixin.py:188} INFO - 2026-09-20 11:14:40,670 | INFO     | generators.phrase_generator | Inserted 100 new phrases into the database
+[2026-09-20T11:14:40.691+0000] {python.py:237} INFO - Done. Returned value was: 100
+[2026-09-20T11:14:40.693+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-20T11:14:40.720+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory_5, run_id=manual__2026-09-20T11:03:20.949531+00:00, execution_date=20260920T110320, start_date=20260920T111413, end_date=20260920T111440
+[2026-09-20T11:14:40.777+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-09-20T11:14:40.971+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-09-20T11:14:40.984+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

@@ -2,24 +2,25 @@
 Pillow を使ってLong動画用サムネイルを生成するモジュール。
 （設計書の通り、Shortsではサムネイルは生成しない）
 
-語学系動画で効果的なサムネイルの4要素を踏まえて設計（テキストは全て英語で統一）:
+人気の語学系動画のサムネを踏まえた4つの方針で設計:
 
-  1. 文字情報は短くインパクト重視
-     hook_phrase は「3〜6単語・30文字程度の英語キャッチコピー」に限定し、
-     ポスターの見出しのように大きく・太く・短く表示する（説明文にしない）。
-  2. 文字の視認性（コントラスト・フォント）
-     太字＋黒アウトラインで、スマホの小さいプレビューでも読めるようにする。
-     同梱の Poppins Bold を使い、環境依存の system font に頼らない。
-  3. 表情や感情の表現
-     Pexelsで「疑問/驚き/ひらめき」等の表情キーワードを掛け合わせて検索した
-     人物写真を、顔が大きく収まるようズームし気味に右側パネルへ配置する。
-  4. Before/After・NG/OKの対比
-     ❌/⭕ のアイコン（フォント依存を避けるため図形として描画）付きの
-     2行ブロックで、不自然な言い方 vs ネイティブの言い方を対比表示する。
-     元ネタが無い/信頼できない場合は自動的にこのブロックを省略する。
+  1. トピック名を最大・最優先で表示
+     sub_title（例: "Restaurant English"）を画面内で最も大きい見出しにする。
+     先頭の単語だけブランドイエローで強調し、ポップな印象を出す。
+  2. フック（不安訴求・問いかけ）を2番目に目立つ要素として表示
+     hook_phrase は暖色の角丸バナーに乗せ、トピックより一回り小さいが
+     はっきり分かるサイズで配置する。
+  3. 表情を右側に配置（写真ではなくPillowで描くアイコン）
+     Pexels写真+背景除去はモデルダウンロードやDocker再ビルドが必要で
+     「無料かつ確実」とは言い切れないため、フォントに依存しない図形描画で
+     驚き/笑顔/考え中などの表情アイコンを直接描く。外部APIや追加の重い依存
+     無しで、常に同じ品質で表示できる。
+  4. 全体的に明るく・柔らかい雰囲気
+     暖色（オレンジ）のフックバナー、黒より柔らかい焦げ茶のアウトライン、
+     角丸を多用し、"楽しさが伝わる"配色にしている。
 
   加えて以下も維持:
-  - トピック名を最大の太字見出しとして配置（前回の改修を踏襲）
+  - Before/After・NG/OKの対比（❌/⭕は図形描画、フォント依存を避ける）
   - 背景の歪み防止（中央クロップ）
   - 長いテキストでも破綻しない自動折返し＋省略記号での丸め込み
 """
@@ -43,25 +44,32 @@ THUMBNAIL_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 THUMB_WIDTH, THUMB_HEIGHT = 1280, 720
 
 # ------------------------------------------------------------------
-# ブランドカラー
+# ブランドカラー（④ 明るく柔らかい雰囲気を意識した配色）
 # ------------------------------------------------------------------
-COLOR_BG_FALLBACK = (15, 23, 42)
+COLOR_BG_FALLBACK = (36, 28, 56)
 COLOR_TEXT_MAIN = "#FFFFFF"
-COLOR_TEXT_OUTLINE = "#0B1220"
-COLOR_ACCENT = "#FFD54A"       # 見出しタグ（ブランドイエロー）
+COLOR_TEXT_OUTLINE = "#3A2415"     # 黒より柔らかい焦げ茶（アウトライン用）
+COLOR_ACCENT = "#FFD54A"           # ブランドイエロー（topicの強調語・アイコン顔に統一）
 COLOR_ACCENT_TEXT = "#141414"
-COLOR_BADGE_BG = "#FF4D4D"     # キャッチコピー banner（注意/好奇心を想起させる赤）
-COLOR_BADGE_TEXT = "#FFFFFF"
+COLOR_HOOK_BG = "#FF8A3D"          # フックバナー：暖色オレンジ（警告色より楽しい印象）
+COLOR_HOOK_TEXT = "#FFFFFF"
 COLOR_NG = "#FF5C5C"
 COLOR_OK = "#3DDC84"
-COLOR_ROW_BG = (10, 14, 25, 200)
+COLOR_ROW_BG = (28, 18, 12, 200)
 
-# 人物パネルのサイズ・馴染ませ量
-PERSON_PANEL_WIDTH = 460
-PERSON_PANEL_FEATHER = 150     # 左端をこの幅(px)でグラデーション馴染ませ
-PERSON_PANEL_TOP_BIAS = 0.12   # 0=上端基準, 0.5=中央基準（顔が残るよう上寄りに）
-PERSON_PANEL_ZOOM = 1.18       # >1 で少しズームし、顔を大きく見せる
-TEXT_TO_PANEL_GAP = 40         # テキスト領域とパネルの間の安全マージン
+# 表情アイコン（右側に配置、Pillowの図形描画のみで作成 = 追加コスト・依存ゼロ）
+ICON_RADIUS = 190
+ICON_CENTER_X = THUMB_WIDTH - 250
+ICON_CENTER_Y = int(THUMB_HEIGHT * 0.54)
+ICON_SAFETY_PAD = 30
+COLOR_ICON_FACE = "#FFD54A"
+COLOR_ICON_OUTLINE = "#3A2415"
+COLOR_ICON_CHEEK = "#FF9F6B"
+COLOR_ICON_SHADOW = (20, 12, 8, 90)
+
+_EXPRESSIONS = ["surprised", "happy", "thinking", "curious"]
+
+TEXT_TO_ICON_GAP = 40  # テキスト領域とアイコンの間の安全マージン
 
 # 同梱フォント（環境依存の system font に頼らない。テキストは全て英語のため1種類でよい）
 _BUNDLED_IMPACT_FONT = settings.assets_dir / "fonts" / "Poppins-Bold.ttf"
@@ -79,7 +87,7 @@ _DEFAULT_HOOK_PHRASES = [
     "AVOID THIS MISTAKE",
 ]
 
-_MAX_HOOK_CHARS = 32
+_MAX_HOOK_CHARS = 42
 _ELLIPSIS = "…"
 
 
@@ -173,20 +181,8 @@ def _fit_text(
     return font, lines
 
 
-def _cover_resize(
-    img: Image.Image,
-    target_w: int,
-    target_h: int,
-    vertical_bias: float = 0.5,
-    zoom: float = 1.0,
-) -> Image.Image:
-    """アスペクト比を保ったままクロップでリサイズする（引き伸ばしによる歪みを防ぐ）。
-
-    vertical_bias: 0=上端基準でクロップ, 0.5=中央, 1=下端基準。
-        人物ポートレートは被写体が上部に写っていることが多いため、
-        人物パネルでは小さめの値(上寄り)を指定して顔が切れないようにする。
-    zoom: 1より大きい値で被写体を少し拡大する（顔を大きく見せたい場合に使用）。
-    """
+def _cover_resize(img: Image.Image, target_w: int, target_h: int) -> Image.Image:
+    """アスペクト比を保ったまま中央クロップでリサイズする（引き伸ばしによる歪みを防ぐ）。"""
     src_w, src_h = img.size
     if src_w == 0 or src_h == 0:
         return img.resize((target_w, target_h), Image.LANCZOS)
@@ -201,33 +197,29 @@ def _cover_resize(
         new_w = target_w
         new_h = max(target_h, int(new_w / src_ratio))
 
-    new_w = max(target_w, int(new_w * zoom))
-    new_h = max(target_h, int(new_h * zoom))
-
     resized = img.resize((new_w, new_h), Image.LANCZOS)
     left = (new_w - target_w) // 2
-    top = int((new_h - target_h) * max(0.0, min(1.0, vertical_bias)))
-    top = max(0, min(top, new_h - target_h))
+    top = (new_h - target_h) // 2
     return resized.crop((left, top, left + target_w, top + target_h))
 
 
 def _apply_readability_treatment(base: Image.Image) -> Image.Image:
     """下部を重点的に暗くするグラデーション＋外周ビネットを重ねて、
-    どんな背景写真・人物パネルでも文字が読めるようにする。"""
+    どんな背景写真でも文字が読めるようにする。"""
     width, height = base.size
 
     gradient = Image.new("L", (width, height), 0)
     grad_draw = ImageDraw.Draw(gradient)
     for y in range(height):
-        alpha = int(190 * (y / height) ** 1.4)
+        alpha = int(175 * (y / height) ** 1.4)
         grad_draw.line([(0, y), (width, y)], fill=alpha)
-    dark_layer = Image.new("RGBA", base.size, (5, 8, 20, 255))
+    dark_layer = Image.new("RGBA", base.size, (18, 12, 24, 255))
     dark_layer.putalpha(gradient)
     base = Image.alpha_composite(base, dark_layer)
 
     vignette = Image.new("L", (width, height), 0)
     v_draw = ImageDraw.Draw(vignette)
-    v_draw.rectangle([0, 0, width, height], fill=55)
+    v_draw.rectangle([0, 0, width, height], fill=45)
     v_draw.rectangle([40, 40, width - 40, height - 40], fill=0)
     vignette = vignette.filter(ImageFilter.GaussianBlur(40))
     vignette_layer = Image.new("RGBA", base.size, (0, 0, 0, 255))
@@ -235,33 +227,104 @@ def _apply_readability_treatment(base: Image.Image) -> Image.Image:
     return Image.alpha_composite(base, vignette_layer)
 
 
-def _composite_person_panel(base: Image.Image, person_image: Path) -> Image.Image:
-    """右側に、左端をフェザー馴染ませした縦長の人物パネルを合成する。
-    表情が伝わりやすいよう、顔が残る上寄りでズーム気味にクロップする。"""
-    width, height = base.size
-    panel_x = width - PERSON_PANEL_WIDTH
+def _draw_accented_line(
+    draw: ImageDraw.ImageDraw,
+    x: float,
+    y: float,
+    line: str,
+    font: ImageFont.FreeTypeFont,
+    stroke_width: int,
+) -> None:
+    """先頭の単語だけ差し色(COLOR_ACCENT)、残りは白で1行分のテキストを描画する。
+    人気チャンネルのサムネによくある「STOP」「WHY」のような強調演出。"""
+    words = line.split(" ", 1)
+    first_word = words[0]
+    rest = f" {words[1]}" if len(words) > 1 else ""
 
-    try:
-        src = Image.open(person_image).convert("RGB")
-    except Exception as e:
-        logger.warning(f"Failed to load person image {person_image}: {e}")
-        return base
+    draw.text(
+        (x, y), first_word, font=font, fill=COLOR_ACCENT,
+        stroke_width=stroke_width, stroke_fill=COLOR_TEXT_OUTLINE,
+    )
+    if rest:
+        first_w = draw.textlength(first_word, font=font)
+        draw.text(
+            (x + first_w, y), rest, font=font, fill=COLOR_TEXT_MAIN,
+            stroke_width=stroke_width, stroke_fill=COLOR_TEXT_OUTLINE,
+        )
 
-    panel_img = _cover_resize(
-        src, PERSON_PANEL_WIDTH, height,
-        vertical_bias=PERSON_PANEL_TOP_BIAS, zoom=PERSON_PANEL_ZOOM,
-    ).convert("RGBA")
 
-    mask = Image.new("L", (PERSON_PANEL_WIDTH, height), 255)
-    mask_draw = ImageDraw.Draw(mask)
-    for x in range(min(PERSON_PANEL_FEATHER, PERSON_PANEL_WIDTH)):
-        alpha = int(255 * (x / PERSON_PANEL_FEATHER))
-        mask_draw.line([(x, 0), (x, height)], fill=alpha)
-    panel_img.putalpha(mask)
+def _draw_reaction_icon(base: Image.Image, cx: int, cy: int, r: int, expression: str) -> None:
+    """外部の写真やAPIに頼らず、Pillowの図形描画だけで表情アイコンを描く
+    （常に無料・確実に表示できる）。ドロップシャドウで背景から浮かせる。"""
+    # シャドウ
+    shadow_layer = Image.new("RGBA", base.size, (0, 0, 0, 0))
+    sd = ImageDraw.Draw(shadow_layer)
+    sd.ellipse([cx - r + 8, cy - r + 14, cx + r + 8, cy + r + 14], fill=COLOR_ICON_SHADOW)
+    shadow_layer = shadow_layer.filter(ImageFilter.GaussianBlur(16))
+    base.alpha_composite(shadow_layer)
 
-    base = base.copy()
-    base.alpha_composite(panel_img, dest=(panel_x, 0))
-    return base
+    draw = ImageDraw.Draw(base)
+    outline_w = max(5, int(r * 0.035))
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=COLOR_ICON_FACE, outline=COLOR_ICON_OUTLINE, width=outline_w)
+
+    eye_r = r * 0.11
+    eye_dx = r * 0.32
+    eye_y = cy - r * 0.08
+    lw = max(5, int(r * 0.05))
+
+    if expression == "happy":
+        for sx in (-1, 1):
+            ex = cx + sx * eye_dx
+            draw.arc(
+                [ex - eye_r * 1.3, eye_y - eye_r, ex + eye_r * 1.3, eye_y + eye_r * 1.7],
+                start=200, end=340, fill=COLOR_ICON_OUTLINE, width=lw,
+            )
+        draw.arc(
+            [cx - r * 0.5, cy + r * 0.02, cx + r * 0.5, cy + r * 0.55],
+            start=15, end=165, fill=COLOR_ICON_OUTLINE, width=lw + 2,
+        )
+        for sx in (-1, 1):
+            ccx = cx + sx * r * 0.58
+            ccy = cy + r * 0.18
+            cr = r * 0.13
+            draw.ellipse([ccx - cr, ccy - cr * 0.75, ccx + cr, ccy + cr * 0.75], fill=COLOR_ICON_CHEEK)
+    elif expression == "thinking":
+        for sx in (-1, 1):
+            ex = cx + sx * eye_dx
+            draw.ellipse([ex - eye_r * 0.8, eye_y - eye_r * 0.8, ex + eye_r * 0.8, eye_y + eye_r * 0.8], fill=COLOR_ICON_OUTLINE)
+        draw.line(
+            [cx - eye_dx - eye_r * 1.5, eye_y - r * 0.16, cx - eye_dx + eye_r * 1.5, eye_y - r * 0.30],
+            fill=COLOR_ICON_OUTLINE, width=lw,
+        )
+        draw.line(
+            [cx + eye_dx - eye_r * 1.5, eye_y - r * 0.18, cx + eye_dx + eye_r * 1.5, eye_y - r * 0.18],
+            fill=COLOR_ICON_OUTLINE, width=lw,
+        )
+        draw.line(
+            [cx - r * 0.22, cy + r * 0.36, cx + r * 0.28, cy + r * 0.30],
+            fill=COLOR_ICON_OUTLINE, width=lw,
+        )
+    elif expression == "curious":
+        for sx in (-1, 1):
+            ex = cx + sx * eye_dx
+            draw.ellipse([ex - eye_r, eye_y - eye_r, ex + eye_r, eye_y + eye_r], fill=COLOR_ICON_OUTLINE)
+        draw.line(
+            [cx - eye_dx - eye_r * 1.5, eye_y - r * 0.32, cx - eye_dx + eye_r * 1.5, eye_y - r * 0.14],
+            fill=COLOR_ICON_OUTLINE, width=lw,
+        )
+        mr = r * 0.14
+        draw.ellipse([cx - mr, cy + r * 0.30 - mr, cx + mr, cy + r * 0.30 + mr], outline=COLOR_ICON_OUTLINE, width=lw)
+    else:  # surprised（デフォルト）
+        for sx in (-1, 1):
+            ex = cx + sx * eye_dx
+            draw.ellipse([ex - eye_r, eye_y - eye_r, ex + eye_r, eye_y + eye_r], fill=COLOR_ICON_OUTLINE)
+            bx = ex
+            draw.line(
+                [bx - eye_r * 1.4, eye_y - r * 0.24, bx + eye_r * 1.4, eye_y - r * 0.34],
+                fill=COLOR_ICON_OUTLINE, width=lw,
+            )
+        mr = r * 0.20
+        draw.ellipse([cx - mr, cy + r * 0.30 - mr, cx + mr, cy + r * 0.30 + mr], fill=COLOR_ICON_OUTLINE)
 
 
 def _draw_ng_icon(draw: ImageDraw.ImageDraw, cx: float, cy: float, r: float) -> None:
@@ -286,7 +349,6 @@ def _layout_ng_ok_rows(
     draw: ImageDraw.ImageDraw, max_width: int, ng_text: str, ok_text: str
 ) -> list[dict]:
     """NG/OK各行のレイアウトを実測する（描画はしない）。"""
-    font = _impact_font(30)
     icon_r = 20
     pad_x, pad_y = 16, 9
     icon_gap = 14
@@ -341,23 +403,24 @@ class ThumbnailBuilder:
         sub_title: str,
         background_image: Path | None = None,
         hook_phrase: str | None = None,
-        person_image: Path | None = None,
+        expression: str | None = None,
         ng_phrase: str | None = None,
         ok_phrase: str | None = None,
     ) -> Path:
         """
         Args:
             video_id: DB上の動画ID（ファイル名に使用）
-            main_title: 付随情報として控えめに表示するテキスト
-                （例: "20 Daily English Expressions"）。見出しタグとして表示される。
-            sub_title: トピック名。最も目立つ大きな見出しとして表示される
-                （例: "Restaurant English"）。
+            main_title: 現在未使用（呼び出し側との互換性のため引数だけ残している）。
+            sub_title: トピック名。画面内で最も大きい主役の見出しとして表示される
+                （例: "Restaurant English"）。先頭の単語だけブランドイエローで強調。
             background_image: 背景に使う画像（無ければ紺色の単色背景）
-            hook_phrase: 左上のバナーに表示する、短い英語キャッチコピー
-                （3〜6単語・30文字程度を想定）。未指定なら既定の煽り文句からランダムに選ぶ。
-            person_image: トピックに合う人物の縦長ポートレート画像。
-                指定があれば右側にパネルとして合成する。None または
-                読み込み失敗時は、パネル無しの従来レイアウトに自動フォールバックする。
+            hook_phrase: 2番目に目立つ要素として、暖色の角丸バナーに表示する
+                短い英語キャッチコピー（3〜6単語・30文字程度を想定）。
+                未指定なら既定の煽り文句からランダムに選ぶ。
+            expression: 右側に描く表情アイコンの種類
+                （"surprised" / "happy" / "thinking" / "curious"）。
+                未指定ならランダムに選ぶ。写真ではなく図形描画なので、
+                外部APIやモデルに依存せず常に同じ品質で表示できる。
             ng_phrase / ok_phrase: NG(不自然な言い方) / OK(ネイティブの言い方) の
                 対比ペア。両方とも指定された場合のみ ❌/⭕ ブロックを描画する。
                 根拠が薄い場合は呼び出し側(metadata_generator)で空文字にされ、
@@ -374,62 +437,20 @@ class ThumbnailBuilder:
         else:
             base = Image.new("RGB", (THUMB_WIDTH, THUMB_HEIGHT), color=COLOR_BG_FALLBACK)
         base = base.convert("RGBA")
-
-        # ---- 2. 人物パネル（あれば先に合成し、この後の可読性処理を全体に効かせる） ----
-        has_person_panel = bool(person_image and person_image.exists())
-        if has_person_panel:
-            base = _composite_person_panel(base, person_image)
-
         base = _apply_readability_treatment(base)
+
+        # ---- 2. 表情アイコン（右側、鮮やかなまま可読性処理の上に乗せる） ----
+        chosen_expression = expression or random.choice(_EXPRESSIONS)
+        _draw_reaction_icon(base, ICON_CENTER_X, ICON_CENTER_Y, ICON_RADIUS, chosen_expression)
+        reserved_right_width = (THUMB_WIDTH - (ICON_CENTER_X - ICON_RADIUS - ICON_SAFETY_PAD))
+
         draw = ImageDraw.Draw(base)
 
         margin = 56
-        if has_person_panel:
-            panel_x = THUMB_WIDTH - PERSON_PANEL_WIDTH
-            text_right_limit = panel_x - TEXT_TO_PANEL_GAP
-        else:
-            text_right_limit = THUMB_WIDTH - margin
+        text_right_limit = (THUMB_WIDTH - reserved_right_width) - TEXT_TO_ICON_GAP
         max_text_width = text_right_limit - margin
 
-        # ---- 3. トピック名（最も目立つ、太字＋黒アウトラインの大見出し） ----
-        topic_stroke_width = 6
-        topic_font, topic_lines = _fit_text(
-            draw, sub_title, max_text_width, start_size=96, min_size=52,
-            max_lines=2, stroke_width=topic_stroke_width, font_loader=_impact_font,
-        )
-        topic_line_heights = [
-            draw.textbbox((0, 0), line, font=topic_font, stroke_width=topic_stroke_width)[3]
-            for line in topic_lines
-        ]
-        topic_line_gap = 10
-        topic_block_h = sum(topic_line_heights) + topic_line_gap * (len(topic_lines) - 1)
-
-        # ---- 4. 見出しタグ（main_title、ブランドイエローのピル、控えめなサイズ） ----
-        tag_font = _impact_font(34)
-        tag_w = draw.textlength(main_title, font=tag_font)
-        tag_h = draw.textbbox((0, 0), main_title, font=tag_font)[3]
-
-        bottom_margin = 54
-        tag_y = THUMB_HEIGHT - bottom_margin - tag_h
-        topic_y = tag_y - 26 - topic_block_h
-
-        tag_pad_x, tag_pad_y = 20, 9
-        tag_box = [
-            margin - tag_pad_x, tag_y - tag_pad_y,
-            margin + tag_w + tag_pad_x, tag_y + tag_h + tag_pad_y,
-        ]
-        draw.rounded_rectangle(tag_box, radius=9, fill=COLOR_ACCENT)
-        draw.text((margin, tag_y), main_title, font=tag_font, fill=COLOR_ACCENT_TEXT)
-
-        y_cursor = topic_y
-        for line, line_h in zip(topic_lines, topic_line_heights):
-            draw.text(
-                (margin, y_cursor), line, font=topic_font, fill=COLOR_TEXT_MAIN,
-                stroke_width=topic_stroke_width, stroke_fill=COLOR_TEXT_OUTLINE,
-            )
-            y_cursor += line_h + topic_line_gap
-
-        # ---- 5. キャッチコピー banner（左上、短い英語で不安訴求/問いかけ） ----
+        # ---- 3. フックバナー（2番目に目立つ、暖色の角丸バナー） ----
         hook_text = (hook_phrase or random.choice(_DEFAULT_HOOK_PHRASES)).strip()
         if len(hook_text) > _MAX_HOOK_CHARS:
             hook_text = hook_text[: _MAX_HOOK_CHARS - 1].rstrip() + _ELLIPSIS
@@ -437,28 +458,55 @@ class ThumbnailBuilder:
 
         hook_max_width = min(max_text_width, 680)
         hook_font, hook_lines = _fit_text(
-            draw, hook_text, hook_max_width, start_size=48, min_size=30,
+            draw, hook_text, hook_max_width, start_size=52, min_size=30,
             max_lines=2, font_loader=_impact_font,
         )
         hook_line_h = draw.textbbox((0, 0), hook_lines[0], font=hook_font)[3]
-        pad_x, pad_y, line_spacing = 28, 20, 10
-        badge_w = max(draw.textlength(line, font=hook_font) for line in hook_lines) + pad_x * 2
-        badge_h = hook_line_h * len(hook_lines) + pad_y * 2 + line_spacing * (len(hook_lines) - 1)
-        badge_x, badge_y = margin, margin
+        pad_x, pad_y, line_spacing = 26, 18, 10
+        hook_w = max(draw.textlength(line, font=hook_font) for line in hook_lines) + pad_x * 2
+        hook_h = hook_line_h * len(hook_lines) + pad_y * 2 + line_spacing * (len(hook_lines) - 1)
+        hook_x, hook_y = margin, 48
         draw.rounded_rectangle(
-            [badge_x, badge_y, badge_x + badge_w, badge_y + badge_h], radius=18, fill=COLOR_BADGE_BG
+            [hook_x, hook_y, hook_x + hook_w, hook_y + hook_h], radius=hook_h / 2.2, fill=COLOR_HOOK_BG
         )
-        hy = badge_y + pad_y
+        hy = hook_y + pad_y
         for line in hook_lines:
-            draw.text((badge_x + pad_x, hy), line, font=hook_font, fill=COLOR_BADGE_TEXT)
+            draw.text((hook_x + pad_x, hy), line, font=hook_font, fill=COLOR_HOOK_TEXT)
             hy += hook_line_h + line_spacing
+        hook_bottom = hook_y + hook_h
 
-        # ---- 6. NG/OK 対比ブロック（banner の下、topic の上に収まる場合のみ描画） ----
+        # ---- 4. トピック名（最も目立つ、太字＋アウトラインの大見出し。先頭の単語だけ強調） ----
+        topic_stroke_width = 7
+        topic_font, topic_lines = _fit_text(
+            draw, sub_title, max_text_width, start_size=100, min_size=56,
+            max_lines=2, stroke_width=topic_stroke_width, font_loader=_impact_font,
+        )
+        topic_line_heights = [
+            draw.textbbox((0, 0), line, font=topic_font, stroke_width=topic_stroke_width)[3]
+            for line in topic_lines
+        ]
+        topic_line_gap = 10
+        topic_x, topic_y = margin, hook_bottom + 30
+        ty = topic_y
+        for i, (line, line_h) in enumerate(zip(topic_lines, topic_line_heights)):
+            if i == 0:
+                # 最初の行だけ、先頭の単語を差し色で強調する
+                _draw_accented_line(draw, topic_x, ty, line, topic_font, topic_stroke_width)
+            else:
+                draw.text(
+                    (topic_x, ty), line, font=topic_font, fill=COLOR_TEXT_MAIN,
+                    stroke_width=topic_stroke_width, stroke_fill=COLOR_TEXT_OUTLINE,
+                )
+            ty += line_h + topic_line_gap
+        topic_bottom = ty - topic_line_gap
+
+        # ---- 5. NG/OK 対比ブロック（トピックの下、収まる場合のみ描画） ----
         ng_phrase = (ng_phrase or "").strip()
         ok_phrase = (ok_phrase or "").strip()
         if ng_phrase and ok_phrase:
-            block_top = badge_y + badge_h + 14
-            available_h = topic_y - 10 - block_top
+            block_top = topic_bottom + 26
+            bottom_safe_margin = 40
+            available_h = (THUMB_HEIGHT - bottom_safe_margin) - block_top
             ng_ok_rows = _layout_ng_ok_rows(draw, max_text_width, ng_phrase, ok_phrase)
             required_h = sum(r["row_h"] for r in ng_ok_rows) + 10 * (len(ng_ok_rows) - 1)
             if available_h >= required_h:
@@ -468,7 +516,7 @@ class ThumbnailBuilder:
                     f"Skipping NG/OK block: needs {required_h}px, only {available_h}px available"
                 )
 
-        # ---- 7. 書き出し ----
+        # ---- 6. 書き出し ----
         out_path = THUMBNAIL_OUTPUT_DIR / f"long_{video_id}.jpg"
         base.convert("RGB").save(out_path, quality=94)
         logger.info(f"Built thumbnail -> {out_path}")

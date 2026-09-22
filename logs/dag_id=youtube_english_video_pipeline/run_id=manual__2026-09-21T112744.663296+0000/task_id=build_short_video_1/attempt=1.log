@@ -1,0 +1,23 @@
+[2026-09-21T11:27:48.296+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-21T11:27:48.341+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 manual__2026-09-21T11:27:44.663296+00:00 [queued]>
+[2026-09-21T11:27:48.351+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 manual__2026-09-21T11:27:44.663296+00:00 [queued]>
+[2026-09-21T11:27:48.354+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-21T11:27:48.368+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video_1> on 2026-09-21 11:27:44.663296+00:00
+[2026-09-21T11:27:48.374+0000] {standard_task_runner.py:64} INFO - Started process 243 to run task
+[2026-09-21T11:27:48.378+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video_1', 'manual__2026-09-21T11:27:44.663296+00:00', '--job-id', '1438', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp7euzuhng']
+[2026-09-21T11:27:48.381+0000] {standard_task_runner.py:91} INFO - Job 1438: Subtask build_short_video_1
+[2026-09-21T11:27:48.448+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video_1 manual__2026-09-21T11:27:44.663296+00:00 [running]> on host 73b18333cdfe
+[2026-09-21T11:27:48.769+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-21T11:27:44.663296+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-09-21T11:27:44.663296+00:00'
+[2026-09-21T11:27:48.770+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-21T11:27:49.849+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:49,849 | INFO     | planner.video_planner | Planned SHORT video: topic='General English', phrases=1
+[2026-09-21T11:27:50.117+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:50,116 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_3508.mp3
+[2026-09-21T11:27:50.395+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:50,395 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_3508.mp3
+[2026-09-21T11:27:51.358+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:51,358 | INFO     | media.image_downloader | Downloaded background image for scene='event' -> /opt/airflow/output/images/short_3508.jpg
+[2026-09-21T11:27:56.119+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:56,119 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/short_bgm.mp3, rendering without background music
+[2026-09-21T11:27:58.611+0000] {logging_mixin.py:188} INFO - 2026-09-21 11:27:58,611 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/short_3508.mp4
+[2026-09-21T11:28:01.859+0000] {python.py:237} INFO - Done. Returned value was: {'video_id': 442, 'file_path': '/opt/airflow/output/videos/short_3508.mp4', 'title': 'General English: How to ask for the start time like a pro', 'description': "General English: Learn the most natural way to ask 'What time does it start?' in a professional or casual setting. Many English learners rely on textbook phrases that sound stiff or robotic in conversation. In this quick lesson, Taky from Taky's Language School shows you how to ask about event times so you sound natural, confident, and fluent. Perfect for Japanese speakers looking to master practical spoken English for everyday life and business. Stop guessing and start speaking like a native speaker today!", 'tags': ['General English', 'English conversation', 'English for Japanese speakers', "Taky's Language School", 'Spoken English', 'Learn English', 'English phrases'], 'video_type': 'short'}
+[2026-09-21T11:28:01.861+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-21T11:28:01.899+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=build_short_video_1, run_id=manual__2026-09-21T11:27:44.663296+00:00, execution_date=20260921T112744, start_date=20260921T112748, end_date=20260921T112801
+[2026-09-21T11:28:01.964+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-09-21T11:28:02.277+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-09-21T11:28:02.282+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
