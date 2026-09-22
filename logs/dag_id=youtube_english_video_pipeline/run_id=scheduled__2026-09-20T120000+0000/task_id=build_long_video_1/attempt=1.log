@@ -1,0 +1,50 @@
+[2026-09-21T12:00:51.696+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-21T12:00:51.718+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-20T12:00:00+00:00 [queued]>
+[2026-09-21T12:00:51.723+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-20T12:00:00+00:00 [queued]>
+[2026-09-21T12:00:51.724+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-21T12:00:51.732+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_long_video_1> on 2026-09-20 12:00:00+00:00
+[2026-09-21T12:00:51.735+0000] {standard_task_runner.py:64} INFO - Started process 869 to run task
+[2026-09-21T12:00:51.737+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_long_video_1', 'scheduled__2026-09-20T12:00:00+00:00', '--job-id', '1446', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpuei7waq5']
+[2026-09-21T12:00:51.739+0000] {standard_task_runner.py:91} INFO - Job 1446: Subtask build_long_video_1
+[2026-09-21T12:00:51.778+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_long_video_1 scheduled__2026-09-20T12:00:00+00:00 [running]> on host 73b18333cdfe
+[2026-09-21T12:00:51.933+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_long_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-20T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-20T12:00:00+00:00'
+[2026-09-21T12:00:51.935+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-21T12:00:52.240+0000] {logging_mixin.py:188} INFO - 2026-09-21 12:00:52,240 | INFO     | planner.video_planner | Top topic 'Restaurant English' only has 14 unused phrases (need 15). Generating 6 more phrases for this topic instead of mixing topics...
+[2026-09-21T12:00:52.241+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-21T12:00:52.241+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 98, in task_build_long_video
+    result = build_long_video()
+             ^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 134, in build_long_video
+    result = LongVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/long_video.py", line 46, in run
+    plan = self.planner.plan("long")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/planner/video_planner.py", line 79, in plan
+    return self.plan_long()
+           ^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/planner/video_planner.py", line 62, in plan_long
+    generator.generate_and_store(shortfall, topic=topic)
+TypeError: PhraseGenerator.generate_and_store() got an unexpected keyword argument 'topic'
+[2026-09-21T12:00:52.253+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_long_video_1, run_id=scheduled__2026-09-20T12:00:00+00:00, execution_date=20260920T120000, start_date=20260921T120051, end_date=20260921T120052
+[2026-09-21T12:00:52.261+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1446 for task build_long_video_1 (PhraseGenerator.generate_and_store() got an unexpected keyword argument 'topic'; 869)
+[2026-09-21T12:00:52.271+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-09-21T12:00:52.381+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-21T12:00:52.385+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
