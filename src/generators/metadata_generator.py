@@ -35,9 +35,21 @@ class VideoMetadata:
 
 # トピックが無かった場合のフォールバック用テンプレート（Gemini API呼び出し失敗時に使用）
 _FALLBACK_TITLES = {
-    "short": "Daily English Phrase | {topic}",
-    "long": "{count} Daily English Expressions | {topic}",
+    "short": "{topic}: Daily English Phrase",
+    "long": "{topic}: {count} Phrases You'll Actually Use",
 }
+
+# hook_phrase 生成に失敗した場合の最終フォールバック（英語の短いキャッチコピー）。
+# フレーズDBの内容には触れられないため、汎用的な煽り文句にする。
+_FALLBACK_HOOK_PHRASES = [
+    "DON'T SAY THIS WRONG",
+    "MOST LEARNERS MISS THIS",
+    "NATIVES NEVER SAY THIS",
+    "AVOID THIS MISTAKE",
+]
+
+_MAX_HOOK_CHARS = 42        # 英語のキャッチコピー用（主見出しなので少し余裕を持たせる）
+_MAX_NG_OK_CHARS = 40       # NG/OK各フレーズの安全上限（英単語ベース）
 
 
 class MetadataGenerator:

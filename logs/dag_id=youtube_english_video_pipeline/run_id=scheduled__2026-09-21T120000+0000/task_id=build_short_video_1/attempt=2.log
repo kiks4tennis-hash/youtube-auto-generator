@@ -1,0 +1,71 @@
+[2026-09-22T13:43:07.060+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-22T13:43:07.132+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-21T12:00:00+00:00 [queued]>
+[2026-09-22T13:43:07.138+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-21T12:00:00+00:00 [queued]>
+[2026-09-22T13:43:07.144+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2026-09-22T13:43:07.156+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video_1> on 2026-09-21 12:00:00+00:00
+[2026-09-22T13:43:07.161+0000] {standard_task_runner.py:64} INFO - Started process 46486 to run task
+[2026-09-22T13:43:07.163+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video_1', 'scheduled__2026-09-21T12:00:00+00:00', '--job-id', '1543', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpv69g_73i']
+[2026-09-22T13:43:07.167+0000] {standard_task_runner.py:91} INFO - Job 1543: Subtask build_short_video_1
+[2026-09-22T13:43:07.216+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-21T12:00:00+00:00 [running]> on host 73b18333cdfe
+[2026-09-22T13:43:07.392+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-21T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-21T12:00:00+00:00'
+[2026-09-22T13:43:07.394+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-22T13:43:09.183+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:09,183 | INFO     | planner.video_planner | Planned SHORT video: topic='General Communication', phrases=1
+[2026-09-22T13:43:09.482+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:09,481 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_3666.mp3
+[2026-09-22T13:43:09.693+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:09,693 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_3666.mp3
+[2026-09-22T13:43:10.268+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:10,268 | INFO     | media.image_downloader | Downloaded background image for scene='office' -> /opt/airflow/output/images/short_3666.jpg
+[2026-09-22T13:43:13.191+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:13,191 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/short_bgm.mp3, rendering without background music
+[2026-09-22T13:43:14.500+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:14,500 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/short_3666.mp4
+[2026-09-22T13:43:17.635+0000] {logging_mixin.py:188} INFO - 2026-09-22 13:43:17,635 | WARNING  | generators.metadata_generator | Metadata generation via Gemini failed, using fallback: name '_MAX_HOOK_CHARS' is not defined
+[2026-09-22T13:43:17.637+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-22T13:43:17.638+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/src/generators/metadata_generator.py", line 68, in generate
+    hook_phrase = self._sanitize_hook_phrase(data.get("hook_phrase", ""))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/metadata_generator.py", line 89, in _sanitize_hook_phrase
+    if len(hook_phrase) > _MAX_HOOK_CHARS:
+                          ^^^^^^^^^^^^^^^
+NameError: name '_MAX_HOOK_CHARS' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 77, in task_build_short_video
+    result = build_short_video()
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/short_video.py", line 91, in build_short_video
+    result = ShortVideoPipeline().run()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/video/short_video.py", line 64, in run
+    metadata = self.metadata_gen.generate("short", plan.topic, [phrase])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/metadata_generator.py", line 80, in generate
+    return self._fallback_metadata(video_type, topic, phrases)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/metadata_generator.py", line 124, in _fallback_metadata
+    hook_phrase = cls._sanitize_hook_phrase("")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/metadata_generator.py", line 88, in _sanitize_hook_phrase
+    return random.choice(_FALLBACK_HOOK_PHRASES)
+                         ^^^^^^^^^^^^^^^^^^^^^^
+NameError: name '_FALLBACK_HOOK_PHRASES' is not defined
+[2026-09-22T13:43:17.688+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=build_short_video_1, run_id=scheduled__2026-09-21T12:00:00+00:00, execution_date=20260921T120000, start_date=20260922T134307, end_date=20260922T134317
+[2026-09-22T13:43:17.709+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 1543 for task build_short_video_1 (name '_FALLBACK_HOOK_PHRASES' is not defined; 46486)
+[2026-09-22T13:43:17.757+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2026-09-22T13:43:17.881+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-09-22T13:43:17.886+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

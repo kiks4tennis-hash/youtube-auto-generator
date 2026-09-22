@@ -663,3 +663,117 @@
 [2026-09-22T13:41:26.791+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
 [2026-09-22T13:41:26.822+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:41:26.822+0000] {dag.py:3089} INFO - Sync 1 DAGs
 [2026-09-22T13:41:26.847+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.090 seconds
+[2026-09-22T13:41:57.238+0000] {processor.py:161} INFO - Started process (PID=46470) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:41:57.239+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:41:57.241+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:41:57.241+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:41:57.275+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:41:57.326+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:41:57.326+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:41:57.354+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.125 seconds
+[2026-09-22T13:42:27.500+0000] {processor.py:161} INFO - Started process (PID=46475) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:27.501+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:42:27.503+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:42:27.503+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:27.522+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:27.554+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:42:27.554+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:42:27.580+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.085 seconds
+[2026-09-22T13:42:57.785+0000] {processor.py:161} INFO - Started process (PID=46480) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:57.786+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:42:57.788+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:42:57.788+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:57.808+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:42:57.852+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:42:57.852+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:42:57.876+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.098 seconds
+[2026-09-22T13:43:28.107+0000] {processor.py:161} INFO - Started process (PID=46737) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:28.109+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:43:28.110+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:43:28.110+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:28.135+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:28.165+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:43:28.165+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:43:28.193+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.093 seconds
+[2026-09-22T13:43:58.492+0000] {processor.py:161} INFO - Started process (PID=46742) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:58.493+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:43:58.495+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:43:58.495+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:58.514+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:43:58.550+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:43:58.550+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:43:58.575+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.089 seconds
+[2026-09-22T13:44:44.081+0000] {processor.py:161} INFO - Started process (PID=202) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:44:44.082+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:44:44.084+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:44:44.084+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:44:44.121+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:44:44.146+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:44:44.145+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:44:44.178+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.101 seconds
+[2026-09-22T13:45:14.333+0000] {processor.py:161} INFO - Started process (PID=207) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:14.334+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:45:14.336+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:45:14.335+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:14.358+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:14.571+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:45:14.571+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:45:14.597+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.269 seconds
+[2026-09-22T13:45:44.707+0000] {processor.py:161} INFO - Started process (PID=212) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:44.708+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:45:44.709+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:45:44.709+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:44.730+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:45:44.764+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:45:44.763+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:45:44.897+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.195 seconds
+[2026-09-22T13:46:15.044+0000] {processor.py:161} INFO - Started process (PID=217) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:15.045+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:46:15.046+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:46:15.046+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:15.067+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:15.101+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:46:15.101+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:46:15.225+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.186 seconds
+[2026-09-22T13:46:45.359+0000] {processor.py:161} INFO - Started process (PID=222) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:45.360+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:46:45.362+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:46:45.362+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:45.384+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:46:45.525+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:46:45.525+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:46:45.552+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.197 seconds
+[2026-09-22T13:47:15.745+0000] {processor.py:161} INFO - Started process (PID=481) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:15.746+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:47:15.748+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:47:15.748+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:15.889+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:15.925+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:47:15.925+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:47:15.951+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.213 seconds
+[2026-09-22T13:47:46.052+0000] {processor.py:161} INFO - Started process (PID=486) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:46.053+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:47:46.056+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:47:46.055+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:46.109+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:47:46.163+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:47:46.162+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:47:46.201+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.156 seconds
+[2026-09-22T13:48:16.246+0000] {processor.py:161} INFO - Started process (PID=491) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:16.247+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:48:16.249+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:48:16.248+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:16.272+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:16.309+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:48:16.309+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:48:16.339+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.098 seconds
+[2026-09-22T13:48:46.622+0000] {processor.py:161} INFO - Started process (PID=496) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:46.628+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:48:46.635+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:48:46.634+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:46.696+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:48:46.732+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:48:46.732+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:48:46.764+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.150 seconds
+[2026-09-22T13:49:16.989+0000] {processor.py:161} INFO - Started process (PID=501) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:16.990+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:49:16.991+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:49:16.991+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:17.011+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:17.044+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:49:17.044+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:49:17.072+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.090 seconds
+[2026-09-22T13:49:47.261+0000] {processor.py:161} INFO - Started process (PID=506) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:47.262+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:49:47.263+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:49:47.263+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:47.287+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:49:47.318+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:49:47.318+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:49:47.346+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.090 seconds
+[2026-09-22T13:50:17.514+0000] {processor.py:161} INFO - Started process (PID=511) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:17.514+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:50:17.516+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:50:17.516+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:17.534+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:17.560+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:50:17.560+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:50:17.601+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.092 seconds
+[2026-09-22T13:50:47.803+0000] {processor.py:161} INFO - Started process (PID=516) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:47.804+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:50:47.806+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:50:47.805+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:47.825+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:50:47.856+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:50:47.855+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:50:47.883+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.084 seconds
+[2026-09-22T13:51:04.121+0000] {processor.py:161} INFO - Started process (PID=521) to work on /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:51:04.124+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/youtube_pipeline.py for tasks to queue
+[2026-09-22T13:51:04.127+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:51:04.126+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:51:04.262+0000] {processor.py:840} INFO - DAG(s) 'youtube_english_video_pipeline' retrieved from /opt/airflow/dags/youtube_pipeline.py
+[2026-09-22T13:51:04.296+0000] {logging_mixin.py:188} INFO - [2026-09-22T13:51:04.296+0000] {dag.py:3089} INFO - Sync 1 DAGs
+[2026-09-22T13:51:04.353+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/youtube_pipeline.py took 0.244 seconds
