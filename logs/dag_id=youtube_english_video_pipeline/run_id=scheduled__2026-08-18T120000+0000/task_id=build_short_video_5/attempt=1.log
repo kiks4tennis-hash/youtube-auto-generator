@@ -1,0 +1,24 @@
+[2026-08-20T00:19:11.567+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-08-20T00:19:11.625+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_5 scheduled__2026-08-18T12:00:00+00:00 [queued]>
+[2026-08-20T00:19:11.637+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_5 scheduled__2026-08-18T12:00:00+00:00 [queued]>
+[2026-08-20T00:19:11.640+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-08-20T00:19:11.663+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video_5> on 2026-08-18 12:00:00+00:00
+[2026-08-20T00:19:11.670+0000] {standard_task_runner.py:64} INFO - Started process 47523 to run task
+[2026-08-20T00:19:11.674+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video_5', 'scheduled__2026-08-18T12:00:00+00:00', '--job-id', '825', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpqec8gec7']
+[2026-08-20T00:19:11.678+0000] {standard_task_runner.py:91} INFO - Job 825: Subtask build_short_video_5
+[2026-08-20T00:19:11.821+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video_5 scheduled__2026-08-18T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-08-20T00:19:12.145+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video_5' AIRFLOW_CTX_EXECUTION_DATE='2026-08-18T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-08-18T12:00:00+00:00'
+[2026-08-20T00:19:12.147+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-08-20T00:19:13.375+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:13,375 | INFO     | planner.video_planner | Planned SHORT video: topic='Shopping English', phrases=1
+[2026-08-20T00:19:13.810+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:13,810 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2101.mp3
+[2026-08-20T00:19:14.181+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:14,181 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2101.mp3
+[2026-08-20T00:19:15.107+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:15,107 | INFO     | media.image_downloader | Downloaded background image for scene='store' -> /opt/airflow/output/images/short_2101.jpg
+[2026-08-20T00:19:18.985+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:18,985 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/short_bgm.mp3, rendering without background music
+[2026-08-20T00:19:21.094+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:21,094 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/short_2101.mp4
+[2026-08-20T00:19:27.734+0000] {logging_mixin.py:188} INFO - 2026-08-20 00:19:27,734 | WARNING  | generators.metadata_generator | Metadata generation via Gemini failed, using fallback: RetryError[<Future at 0x7a0788726d90 state=finished raised ResourceExhausted>]
+[2026-08-20T00:19:27.821+0000] {python.py:237} INFO - Done. Returned value was: {'video_id': 243, 'file_path': '/opt/airflow/output/videos/short_2101.mp4', 'title': 'Daily English Phrase | Shopping English', 'description': 'Learn natural English expressions with examples.\n\n- Do you accept credit cards?', 'tags': ['english', 'learnenglish', 'dailyenglish', 'englishphrases'], 'video_type': 'short'}
+[2026-08-20T00:19:27.823+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-08-20T00:19:27.874+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=build_short_video_5, run_id=scheduled__2026-08-18T12:00:00+00:00, execution_date=20260818T120000, start_date=20260820T001911, end_date=20260820T001927
+[2026-08-20T00:19:27.955+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-08-20T00:19:28.255+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-08-20T00:19:28.261+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

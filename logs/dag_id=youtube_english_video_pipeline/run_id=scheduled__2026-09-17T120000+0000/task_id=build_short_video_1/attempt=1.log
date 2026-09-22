@@ -1,0 +1,22 @@
+[2026-09-18T22:23:01.883+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-18T22:23:01.919+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-17T12:00:00+00:00 [queued]>
+[2026-09-18T22:23:01.926+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-17T12:00:00+00:00 [queued]>
+[2026-09-18T22:23:01.927+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-18T22:23:01.941+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video_1> on 2026-09-17 12:00:00+00:00
+[2026-09-18T22:23:01.946+0000] {standard_task_runner.py:64} INFO - Started process 1698 to run task
+[2026-09-18T22:23:01.950+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video_1', 'scheduled__2026-09-17T12:00:00+00:00', '--job-id', '1210', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp8es46clz']
+[2026-09-18T22:23:01.953+0000] {standard_task_runner.py:91} INFO - Job 1210: Subtask build_short_video_1
+[2026-09-18T22:23:02.012+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video_1 scheduled__2026-09-17T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-09-18T22:23:02.250+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-17T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-17T12:00:00+00:00'
+[2026-09-18T22:23:02.252+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-18T22:23:03.156+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:03,155 | INFO     | planner.video_planner | Planned SHORT video: topic='Hotel English', phrases=1
+[2026-09-18T22:23:03.508+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:03,508 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_2859.mp3
+[2026-09-18T22:23:03.849+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:03,848 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_2859.mp3
+[2026-09-18T22:23:04.608+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:04,608 | INFO     | media.image_downloader | Downloaded background image for scene='hotel' -> /opt/airflow/output/images/short_2859.jpg
+[2026-09-18T22:23:08.823+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:08,822 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/short_bgm.mp3, rendering without background music
+[2026-09-18T22:23:10.693+0000] {logging_mixin.py:188} INFO - 2026-09-18 22:23:10,693 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/short_2859.mp4
+[2026-09-18T22:23:49.840+0000] {python.py:237} INFO - Done. Returned value was: {'video_id': 365, 'file_path': '/opt/airflow/output/videos/short_2859.mp4', 'title': 'Room Too Cold? How to Ask to Lower the AC in English #Shorts', 'description': "Is your hotel room freezing? Many English learners try to translate directly from their native language and say awkward phrases like 'weaken the air conditioner.' In this short, learn the natural way to ask the front desk or staff to turn down the AC. Perfect for your next trip abroad!\n\nSubscribe to Taky's Language School for daily practical spoken English you won't find in traditional textbooks.", 'tags': ['hotel english', 'travel english', 'spoken english', 'learn english', 'useful english phrases', 'english conversation', 'air conditioning english', 'hotel travel phrases', 'esl', 'english for travel'], 'video_type': 'short'}
+[2026-09-18T22:23:49.843+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-18T22:23:49.875+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=build_short_video_1, run_id=scheduled__2026-09-17T12:00:00+00:00, execution_date=20260917T120000, start_date=20260918T222301, end_date=20260918T222349
+[2026-09-18T22:23:49.950+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-09-18T22:23:49.975+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

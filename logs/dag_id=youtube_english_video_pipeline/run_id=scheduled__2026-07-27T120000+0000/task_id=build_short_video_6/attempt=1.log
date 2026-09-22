@@ -1,0 +1,23 @@
+[2026-07-28T12:50:43.350+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-28T12:50:43.394+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_6 scheduled__2026-07-27T12:00:00+00:00 [queued]>
+[2026-07-28T12:50:43.405+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.build_short_video_6 scheduled__2026-07-27T12:00:00+00:00 [queued]>
+[2026-07-28T12:50:43.407+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-07-28T12:50:43.425+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_short_video_6> on 2026-07-27 12:00:00+00:00
+[2026-07-28T12:50:43.429+0000] {standard_task_runner.py:64} INFO - Started process 24304 to run task
+[2026-07-28T12:50:43.434+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'build_short_video_6', 'scheduled__2026-07-27T12:00:00+00:00', '--job-id', '513', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmpug74eew3']
+[2026-07-28T12:50:43.438+0000] {standard_task_runner.py:91} INFO - Job 513: Subtask build_short_video_6
+[2026-07-28T12:50:43.522+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.build_short_video_6 scheduled__2026-07-27T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-07-28T12:50:43.770+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='build_short_video_6' AIRFLOW_CTX_EXECUTION_DATE='2026-07-27T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-27T12:00:00+00:00'
+[2026-07-28T12:50:43.771+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-28T12:50:44.798+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:44,797 | INFO     | planner.video_planner | Planned SHORT video: topic='Daily Conversation', phrases=1
+[2026-07-28T12:50:45.139+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:45,139 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/phrase_1134.mp3
+[2026-07-28T12:50:45.447+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:45,447 | INFO     | tts.edge_tts | Synthesized audio -> /opt/airflow/output/audio/example_1134.mp3
+[2026-07-28T12:50:46.051+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:46,050 | INFO     | media.image_downloader | Downloaded background image for scene='car' -> /opt/airflow/output/images/short_1134.jpg
+[2026-07-28T12:50:54.501+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:54,500 | WARNING  | video.video_builder | BGM file not found at /opt/airflow/assets/bgm/short_bgm.mp3, rendering without background music
+[2026-07-28T12:50:55.914+0000] {logging_mixin.py:188} INFO - 2026-07-28 12:50:55,914 | INFO     | video.video_builder | Final video rendered -> /opt/airflow/output/videos/short_1134.mp4
+[2026-07-28T12:51:02.556+0000] {python.py:237} INFO - Done. Returned value was: {'video_id': 133, 'file_path': '/opt/airflow/output/videos/short_1134.mp4', 'title': 'How to Use "I\'m On My Way" in English! 🚗 #Shorts', 'description': 'Learn how to sound natural in English daily conversations! 🗣️✨\n\nWhen someone is waiting for you, you can say:\n"Don\'t worry, I just left the house and I\'m on my way!"\n\n"I\'m on my way" (or "OMW") means you have already left and are traveling to your destination right now.\n\nPractice saying it out loud today!\n\n🔔 Subscribe to Taky\'s Language School for quick, daily spoken English lessons!\n\n#LearnEnglish #EnglishPhrases #DailyEnglish #SpokenEnglish #Shorts', 'tags': ['learn english', 'english phrases', 'im on my way', 'daily conversation english', 'spoken english', 'english learning shorts', 'takys language school', 'english vocabulary', 'natural english', 'english speaking practice'], 'video_type': 'short'}
+[2026-07-28T12:51:02.558+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-28T12:51:02.588+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=youtube_english_video_pipeline, task_id=build_short_video_6, run_id=scheduled__2026-07-27T12:00:00+00:00, execution_date=20260727T120000, start_date=20260728T125043, end_date=20260728T125102
+[2026-07-28T12:51:02.635+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2026-07-28T12:51:02.802+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-28T12:51:02.809+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

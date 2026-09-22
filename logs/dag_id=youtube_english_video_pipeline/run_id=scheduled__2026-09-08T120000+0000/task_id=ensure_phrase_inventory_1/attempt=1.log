@@ -1,0 +1,90 @@
+[2026-09-09T14:00:28.191+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-09-09T14:00:28.329+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-08T12:00:00+00:00 [queued]>
+[2026-09-09T14:00:28.349+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-08T12:00:00+00:00 [queued]>
+[2026-09-09T14:00:28.375+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2026-09-09T14:00:28.410+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): ensure_phrase_inventory_1> on 2026-09-08 12:00:00+00:00
+[2026-09-09T14:00:28.422+0000] {standard_task_runner.py:64} INFO - Started process 4989 to run task
+[2026-09-09T14:00:28.426+0000] {standard_task_runner.py:90} INFO - Running: ['airflow', 'tasks', 'run', 'youtube_english_video_pipeline', 'ensure_phrase_inventory_1', 'scheduled__2026-09-08T12:00:00+00:00', '--job-id', '1044', '--raw', '--subdir', 'DAGS_FOLDER/youtube_pipeline.py', '--cfg-path', '/tmp/tmp3fy3yro5']
+[2026-09-09T14:00:28.436+0000] {standard_task_runner.py:91} INFO - Job 1044: Subtask ensure_phrase_inventory_1
+[2026-09-09T14:00:28.605+0000] {task_command.py:426} INFO - Running <TaskInstance: youtube_english_video_pipeline.ensure_phrase_inventory_1 scheduled__2026-09-08T12:00:00+00:00 [running]> on host cc859d74cf38
+[2026-09-09T14:00:32.661+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='taky' AIRFLOW_CTX_DAG_ID='youtube_english_video_pipeline' AIRFLOW_CTX_TASK_ID='ensure_phrase_inventory_1' AIRFLOW_CTX_EXECUTION_DATE='2026-09-08T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-09-08T12:00:00+00:00'
+[2026-09-09T14:00:32.665+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-09-09T14:00:34.289+0000] {logging_mixin.py:188} INFO - 2026-09-09 14:00:34,289 | INFO     | generators.phrase_generator | Unused phrase inventory: 3 (threshold=30)
+[2026-09-09T14:00:34.296+0000] {logging_mixin.py:188} INFO - 2026-09-09 14:00:34,295 | INFO     | generators.phrase_generator | Inventory low (3). Generating new phrases...
+[2026-09-09T14:00:34.301+0000] {logging_mixin.py:188} INFO - 2026-09-09 14:00:34,301 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-09T18:09:15.749+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:15,749 | INFO     | generators.phrase_generator | Parsed 25 valid phrases out of 25 returned
+[2026-09-09T18:09:15.754+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:15,753 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-09T18:09:27.075+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:27,074 | ERROR    | generators.phrase_generator | Skipping a batch of 25 phrases after retries exhausted: RetryError[<Future at 0x7bea4b86bf50 state=finished raised RetryError>]
+[2026-09-09T18:09:27.076+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:27,076 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-09T18:09:33.985+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:33,985 | ERROR    | generators.phrase_generator | Skipping a batch of 25 phrases after retries exhausted: RetryError[<Future at 0x7bea4b87c690 state=finished raised RetryError>]
+[2026-09-09T18:09:33.986+0000] {logging_mixin.py:188} INFO - 2026-09-09 18:09:33,986 | INFO     | generators.phrase_generator | Requesting 25 phrases from Gemini...
+[2026-09-09T18:09:40.453+0000] {local_task_job_runner.py:313} WARNING - State of this instance has been externally set to up_for_retry. Terminating instance.
+[2026-09-09T18:09:40.454+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
+[2026-09-09T18:09:40.467+0000] {process_utils.py:132} INFO - Sending 15 to group 4989. PIDs of all processes in the group: [4989]
+[2026-09-09T18:09:40.468+0000] {process_utils.py:87} INFO - Sending the signal 15 to group 4989
+[2026-09-09T18:09:40.469+0000] {taskinstance.py:2611} ERROR - Received SIGTERM. Terminating subprocesses.
+[2026-09-09T18:09:40.470+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-09-09T18:09:40.479+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/youtube_pipeline.py", line 58, in task_ensure_phrase_inventory
+    inserted = ensure_phrase_inventory()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 146, in ensure_phrase_inventory
+    inserted = generator.generate_and_store(batch)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 104, in generate_and_store
+    phrases = self.generate_phrases(count)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 76, in generate_phrases
+    collected.extend(self._generate_batch(n))
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 475, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 376, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 398, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 478, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/src/generators/phrase_generator.py", line 62, in _generate_batch
+    raw_text = self._call_gemini(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 336, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/__init__.py", line 485, in __call__
+    self.sleep(do)
+  File "/home/airflow/.local/lib/python3.11/site-packages/tenacity/nap.py", line 31, in sleep
+    time.sleep(seconds)
+  File "/home/airflow/.local/lib/python3.11/site-packages/airflow/models/taskinstance.py", line 2613, in signal_handler
+    raise AirflowTaskTerminated("Task received SIGTERM signal")
+airflow.exceptions.AirflowTaskTerminated: Task received SIGTERM signal
+[2026-09-09T18:09:40.500+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=youtube_english_video_pipeline, task_id=ensure_phrase_inventory_1, run_id=scheduled__2026-09-08T12:00:00+00:00, execution_date=20260908T120000, start_date=20260909T140028, end_date=20260909T180940
+[2026-09-09T18:09:40.561+0000] {process_utils.py:80} INFO - Process psutil.Process(pid=4989, status='terminated', exitcode=2, started='14:00:27') (4989) terminated with exit code 2
